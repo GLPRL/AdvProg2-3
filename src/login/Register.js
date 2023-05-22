@@ -4,6 +4,22 @@ import React, { useState } from 'react';
 import FormGroupRegister from "./FormGroupRegister";
 import {isLoggedIn} from './Login'
 export const registerData = [];
+function imageToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            const base64String = reader.result.split(",")[1];
+            resolve(base64String);
+        };
+
+        reader.onerror = () => {
+            reject(new Error("Failed to read the image."));
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
 function Register(){
 
     const [password, setPassword] = useState('');
@@ -72,7 +88,7 @@ function Register(){
                         username: username,
                         password: password,
                         displayName: displayName,
-                        profilePic: btoa(chooseImage),
+                        profilePic: chooseImage,
                     }),
                 })
                     .then(response => {
@@ -83,13 +99,17 @@ function Register(){
                     });
 
 
-                console.log(btoa(chooseImage))
+
                 setShouldNavigate(true);
             }
     };
     const handleImage =(event) => {
-        setImage(event.target.files[0]);
-        setImageError('');
+        const file = event.target.files[0];
+        imageToBase64(file)
+            .then((base64String) => {
+                setImage(base64String);
+                setImageError('');
+            });
     }
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
@@ -171,7 +191,17 @@ function Register(){
                     {imageError && <small className="form-text text-danger">{imageError}</small> }
                 </div>
                 <div className="form-group">
-                    {chooseImage &&  <div>Selected Image: <img src={URL.createObjectURL(chooseImage)} alt="Profile Picture" className="text-center marginLeft1" id="chooseImg" ></img></div>}
+                    {chooseImage && (
+                        <div>
+                            Selected Image:
+                            <img
+                                src={`data:image/jpeg;base64, ${chooseImage}`}
+                                alt="Profile Picture"
+                                className="text-center marginLeft1"
+                                id="chooseImg"
+                            />
+                        </div>
+                    )}
                 </div>
                 <div className="text-center">
                     <button type="submit" className="btn btn-info marginRight">Register</button>
