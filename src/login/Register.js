@@ -63,13 +63,27 @@ function Register(){
             validSubmission =0;
         }
             if (validSubmission) {
-                registerData.push({
-                    username: username,
-                    password: password,
-                    displayName: displayName,
-                    image: chooseImage,
-                    validRegister: true
+                fetch('http://localhost:5000/api/Users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                        displayName: displayName,
+                        profilePic: btoa(chooseImage),
+                    }),
                 })
+                    .then(response => {
+                        console.log('Response code:', response.status);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+
+
+                console.log(btoa(chooseImage))
                 setShouldNavigate(true);
             }
     };

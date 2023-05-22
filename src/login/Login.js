@@ -2,48 +2,48 @@ import {Link, Navigate} from 'react-router-dom';
 import {useRef, useState} from "react";
 import {registerData} from './Register'
 import FormGroupLogin from "./FormGroupLogin";
+
 export var reqUsername;
 export const isLoggedIn = {value: false};
-function Login(){
+function Login( { setToken,setUser}){
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
     const passwordError = useRef (null);
     const usernameError = useRef(null);
     const [shouldNavigate, setShouldNavigate] = useState(false);
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault(); // prevent the default form submission behavior
         let validLogin = true;
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
-        const searchUser = registerData.find( item => item.username === username);
-            if (searchUser) {
-                const u = searchUser.username;
-                const p = searchUser.password;
-                if(username != u){
-                    usernameError.current.textContent='Wrong username';
-                    validLogin = false;
-                }
-                if(password != p){
-                    passwordError.current.textContent='Wrong password';
-                    validLogin = false;
-                }
-                if(validLogin){
-                    setShouldNavigate(true);
-                    isLoggedIn.value = true;
-                }
-            } else {
-                usernameError.current.textContent='Wrong username';
-                validLogin = false;
-                passwordError.current.textContent='Wrong password';
-                validLogin = false;
-            }
-            if(validLogin){
-                isLoggedIn.value = true;
-                setShouldNavigate(true);
-                reqUsername = username;
-            }
-            
-        // perform login action with username and password
+
+
+        const response = await fetch('http://localhost:5000/api/Tokens', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'accept': '*/*'
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        });
+
+        console.log('Response code:', response.status);
+        if (response.status !== 200) {
+            usernameError.current.textContent='Wrong username';
+            passwordError.current.textContent='Wrong password';
+            return; // Exit the function if response status is not 200
+        }
+
+        const data = await response.text(); // Parse the response body as JSON
+         setToken(data);
+         setUser(username);
+         console.log(username);
+        isLoggedIn.value = true;
+        setShouldNavigate(true);
+        reqUsername = username;
     };
     const handlePasswordChange =(event) =>{
         passwordError.current.textContent='';

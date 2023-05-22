@@ -6,7 +6,7 @@ import "../stylesheets/chatWindow.css"
 import AddContactModal from "../AddContactModal/AddContactModal";
 import { useState } from "react";
 import userData from "../usersData"
-function ChatWindow() {
+function ChatWindow({ setToken, token,user }) {
     const [idCount, setIdCount] = useState(0);
 
     function handleIdCount() {
@@ -31,7 +31,7 @@ function ChatWindow() {
             </head>
 
             <Link to="/" role="button" className="btn-sm btn-danger logoutbutton text" onClick={onClickLogout}>Logout</Link>
-            <ChatApp />
+            <ChatApp user={user} token={token}/>
             <AddContactModal idCount={idCount} handleIdCount={handleIdCount}/>
         </>
     )
