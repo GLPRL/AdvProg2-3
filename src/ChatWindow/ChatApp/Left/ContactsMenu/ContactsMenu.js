@@ -3,7 +3,7 @@ function ContactsMenu(props) {
     return(
         <div className="contactScroll">
             <table className="table table-hover test">
-                <ContactsList setCurrentUser={props.setCurrentUser} setCurrentChatId={props.setCurrentChatId} userContacts={props.userContacts}/>
+                <ContactsList token={props.token} setCurrentContactMsgs={props.setCurrentContactMsgs} setCurrentUser={props.setCurrentUser} setCurrentChatId={props.setCurrentChatId} userContacts={props.userContacts}/>
             </table>
         </div>
     );

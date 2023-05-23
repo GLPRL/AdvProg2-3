@@ -22,37 +22,12 @@ function ChatInteraction(props) {
                                 msg: content
                                 }),
                             })
-
+        if (response.status == 200) {
             console.log("response msg status is " + response.status);
-
-
-
-
-
-
-
-
-
-        let messageArray = [];
-        
-        const now = new Date();
-        const date = now.toLocaleString();
-
-        const msgsConvo = userData.find(item => {
-            if (item.id === props.currentUser) {
-                messageArray = item.messages;
-            }});
-
-        const currentUserIndex = userData.findIndex(item => item.id === props.currentUser)
-        if (currentUserIndex < 0)
-        {
-            alert("Invalid user!");
-            document.getElementById("outText").value = "";
-            return;
         }
-        userData[currentUserIndex].lastMsgTime = date;
+            
+
         const newMsg = {text: content, floatValue: "float-right"};
-        messageArray.push(newMsg);
         document.getElementById("outText").value = "";
         props.msgChangeHandler();
     }

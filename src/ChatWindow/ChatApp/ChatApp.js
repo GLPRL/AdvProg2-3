@@ -7,6 +7,11 @@ function ChatApp(props) {
     const [firstPrint, setfirstPrint] = useState(true);
     const [msgSent,setMsgSent] = useState(false);
     const [currentChatId, setCurrentChatId] = useState(null);
+    const [currentContactMsgs, setCurrentContactMsgs] = useState([])
+
+
+
+
     function msgChangeHandler() {
         setMsgSent(!msgSent);
     }
@@ -14,8 +19,8 @@ function ChatApp(props) {
     },[currentUser]);
     return (
         <div className="container content row no-gutters text">
-            <Left setCurrentUser={setCurrentUser} user={props.user} userContacts={props.userContacts} token={props.token} setCurrentChatId={setCurrentChatId}/>
-            <Right currentUser={currentUser} firstPrint={firstPrint} userContacts={props.userContacts} token={props.token} setfirstPrint={setfirstPrint} msgChangeHandler={msgChangeHandler}/>
+            <Left setCurrentUser={setCurrentUser} user={props.user} userContacts={props.userContacts} token={props.token} setCurrentChatId={setCurrentChatId} setCurrentContactMsgs={setCurrentContactMsgs}/>
+            <Right currentUser={currentUser} firstPrint={firstPrint} userContacts={props.userContacts} token={props.token} setfirstPrint={setfirstPrint} msgChangeHandler={msgChangeHandler} currentContactMsgs={currentContactMsgs}/>
         </div>
     );
 }
