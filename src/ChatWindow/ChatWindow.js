@@ -31,7 +31,7 @@ function ChatWindow({ setToken, token,user }) {
             </head>
 
             <Link to="/" role="button" className="btn-sm btn-danger logoutbutton text" onClick={onClickLogout}>Logout</Link>
-            <ChatApp user={user} token={token} userContacts={userContacts}/>
+            <ChatApp user={user} token={token} userContacts={userContacts} setUserContacts={setUserContacts}/>
             <AddContactModal idCount={idCount} handleIdCount={handleIdCount} token={token} setUserContacts={setUserContacts}/>
         </>
     )
