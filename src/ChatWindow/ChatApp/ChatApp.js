@@ -6,6 +6,7 @@ function ChatApp(props) {
     const [currentUser, setCurrentUser] = useState(1);
     const [firstPrint, setfirstPrint] = useState(true);
     const [msgSent,setMsgSent] = useState(false);
+    const [currentChatId, setCurrentChatId] = useState(null);
     function msgChangeHandler() {
         setMsgSent(!msgSent);
     }
@@ -13,7 +14,7 @@ function ChatApp(props) {
     },[currentUser]);
     return (
         <div className="container content row no-gutters text">
-            <Left setCurrentUser={setCurrentUser} user={props.user} token={props.token}/>
+            <Left setCurrentUser={setCurrentUser} user={props.user} token={props.token} setCurrentChatId={setCurrentChatId}/>
             <Right currentUser={currentUser} firstPrint={firstPrint} setfirstPrint={setfirstPrint} msgChangeHandler={msgChangeHandler}/>
         </div>
     );

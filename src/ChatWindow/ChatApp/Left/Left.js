@@ -4,7 +4,7 @@ function Left(props) {
     return(
         <div className="contactBox  col-sm-4">
             <UserTab idCount={props.idCount} user={props.user} token={props.token}/>
-            <ContactsMenu setCurrentUser={props.setCurrentUser}/>
+            <ContactsMenu setCurrentUser={props.setCurrentUser} setCurrentChatId={props.setCurrentChatId}/>
         </div>
     );
 }

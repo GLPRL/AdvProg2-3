@@ -9,7 +9,7 @@ function AddContactModal(props) {
                 <div className="modal-content">
                     <ModalHeader />
                     <ModalBody />
-                    <ModalFooter idCount={props.idCount} handleIdCount={props.handleIdCount}/>
+                    <ModalFooter idCount={props.idCount} handleIdCount={props.handleIdCount} token={props.token}/>
                 </div>
             </div>
         </div>
