@@ -15,14 +15,6 @@ function Contact(props) {
                             })
         const contactMessages = await response.json();
         props.setCurrentContactMsgs(contactMessages);
-
-
-        const element = document.getElementById("msgScroll");
-        element.scrollTop = element.scrollHeight;
-        var contactName = document.getElementById("contactUser");
-        contactName.innerHTML = props.name;
-        var contactImage = document.getElementById("contactImage");
-        contactImage.src = props.image;
         props.setCurrentContactImage(props.image)
     }
     const contact =

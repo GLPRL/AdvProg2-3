@@ -7,7 +7,6 @@ function ChatInteraction(props) {
             return;
         }
 
-
         let autor = 'Bearer ' + props.token
         console.log("curr user id is " + props.currentUser)
         let userAdress = 'http://localhost:5000/api/Chats/' + props.currentUser + '/Messages'
