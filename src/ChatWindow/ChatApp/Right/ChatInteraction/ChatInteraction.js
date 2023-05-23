@@ -31,9 +31,8 @@ function ChatInteraction(props) {
             })
                 const contactMessages = await responseGet.json();
                 props.setCurrentContactMsgs(contactMessages);
-                console.log(contactMessages)
-                console.log("---------------")
-                console.log(props.currentContactMsgs)
+                props.setContactIdAndTime([props.currentUser, contactMessages[0].created])
+
                 
             
 

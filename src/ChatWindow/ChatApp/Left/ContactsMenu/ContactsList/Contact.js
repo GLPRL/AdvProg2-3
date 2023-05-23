@@ -22,7 +22,10 @@ function Contact(props) {
     }
     
     
-    let lastMsgDate = "dsa"
+    let lastMsgDate = ""
+    if (props.contactIdAndTime[0] == props.id) {
+        lastMsgDate = props.contactIdAndTime[1]
+    }
     const contact =
     <>
         <td><img src={`data:image/jpeg;base64, ${props.image}`} alt="" className="chat-profile-image rounded-circle"></img></td>
