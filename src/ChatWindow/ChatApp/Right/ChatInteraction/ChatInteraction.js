@@ -22,10 +22,20 @@ function ChatInteraction(props) {
                                 msg: content
                                 }),
                             })
-                            props.msgChangeHandler();
-        if (response.status == 200) {
-            console.log("response msg status is " + response.status);
-        }
+
+            const responseGet = await fetch(userAdress,{
+                method: 'GET',
+                headers: {
+                    'Authorization': autor,
+                    'accept': 'text/plain',
+                }
+            })
+                const contactMessages = await responseGet.json();
+                props.setCurrentContactMsgs(contactMessages);
+                console.log(contactMessages)
+                console.log("---------------")
+                console.log(props.currentContactMsgs)
+                
             
 
         const newMsg = {text: content, floatValue: "float-right"};
