@@ -13,8 +13,8 @@ function ChatApp(props) {
 
     return (
         <div className="container content row no-gutters text">
-            <Left setCurrentContactImage={props.setCurrentContactImage} setCurrentUser={setCurrentUser} user={props.user} userContacts={props.userContacts} token={props.token} setCurrentChatId={setCurrentChatId} setCurrentContactMsgs={setCurrentContactMsgs} setUserContacts={props.setUserContacts}/>
-            <Right currentContactMsgs={currentContactMsgs} currentContactImage={props.currentContactImage} currentUser={currentUser} user={props.user} firstPrint={firstPrint} userContacts={props.userContacts} token={props.token} setfirstPrint={setfirstPrint} setCurrentContactMsgs={setCurrentContactMsgs} />
+            <Left setCurrentContactDisplayName={props.setCurrentContactDisplayName} setCurrentContactImage={props.setCurrentContactImage} setCurrentUser={setCurrentUser} user={props.user} userContacts={props.userContacts} token={props.token} setCurrentChatId={setCurrentChatId} setCurrentContactMsgs={setCurrentContactMsgs} setUserContacts={props.setUserContacts}/>
+            <Right currentContactDisplayName={props.currentContactDisplayName} currentContactMsgs={currentContactMsgs} currentContactImage={props.currentContactImage} currentUser={currentUser} user={props.user} firstPrint={firstPrint} userContacts={props.userContacts} token={props.token} setfirstPrint={setfirstPrint} setCurrentContactMsgs={setCurrentContactMsgs} />
         </div>
     );
 }

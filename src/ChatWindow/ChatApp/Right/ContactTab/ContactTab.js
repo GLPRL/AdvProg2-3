@@ -7,6 +7,7 @@ function ContactTab(props) {
         <div className="userTab">
             <img src= {`data:image/jpeg;base64, ${props.currentContactImage}`} alt="" className="user-tab-right-image rounded-circle" id="contactImage"></img>
             <span className="userName userTopLeft" id="contactUser"></span>
+            <span className="userName userTopLeft" id="contactUser">{props.currentContactDisplayName}</span>
         </div>
     );
 }

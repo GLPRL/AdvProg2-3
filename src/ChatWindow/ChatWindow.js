@@ -11,6 +11,7 @@ function ChatWindow({ setToken, token,user }) {
     const [idCount, setIdCount] = useState(0);
     const [userContacts,setUserContacts] = useState([]);
     const [currentContactImage, setCurrentContactImage] = useState(null)
+    const [currentContactDisplayName, setCurrentContactDisplayName] = useState(null);
     function handleIdCount() {
         setIdCount(idCount + 1);
     }
@@ -33,7 +34,7 @@ function ChatWindow({ setToken, token,user }) {
             </head>
 
             <Link to="/" role="button" className="btn-sm btn-danger logoutbutton text" onClick={onClickLogout}>Logout</Link>
-            <ChatApp currentContactImage={currentContactImage} setCurrentContactImage={setCurrentContactImage} user={user} token={token} userContacts={userContacts} setUserContacts={setUserContacts}/>
+            <ChatApp setCurrentContactDisplayName={setCurrentContactDisplayName} currentContactDisplayName={currentContactDisplayName} currentContactImage={currentContactImage} setCurrentContactImage={setCurrentContactImage} user={user} token={token} userContacts={userContacts} setUserContacts={setUserContacts}/>
             <AddContactModal idCount={idCount} handleIdCount={handleIdCount} token={token} setUserContacts={setUserContacts}/>
         </>
     )
