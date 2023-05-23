@@ -22,6 +22,7 @@ function ChatInteraction(props) {
                                 msg: content
                                 }),
                             })
+                            props.msgChangeHandler();
         if (response.status == 200) {
             console.log("response msg status is " + response.status);
         }
@@ -29,7 +30,6 @@ function ChatInteraction(props) {
 
         const newMsg = {text: content, floatValue: "float-right"};
         document.getElementById("outText").value = "";
-        props.msgChangeHandler();
     }
     return(
         <div className="sendLine">

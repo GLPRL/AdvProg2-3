@@ -23,10 +23,11 @@ function Contact(props) {
         contactName.innerHTML = props.name;
         var contactImage = document.getElementById("contactImage");
         contactImage.src = props.image;
+        props.setCurrentContactImage(props.image)
     }
     const contact =
     <>
-        <td><img src={ props.image } alt="" className="chat-profile-image rounded-circle"></img></td>
+        <td><img src={`data:image/jpeg;base64, ${props.image}`} alt="" className="chat-profile-image rounded-circle"></img></td>
         <td className="chat-profile-name">{props.name}</td>
     </>
     return (

@@ -2,7 +2,6 @@ import { useState } from "react";
 import userData from "./../../../../usersData";
 import ChatMessage from "./ChatMessage"
 function ChatMessages(props) {
-
 let messageArray = props.currentContactMsgs;
 const reverseMessageArray = messageArray.slice(0).reverse();
 
