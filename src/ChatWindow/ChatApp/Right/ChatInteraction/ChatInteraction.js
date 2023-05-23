@@ -1,12 +1,40 @@
 import userData from "../../../../usersData";
 import React from "react";
 function ChatInteraction(props) {
-    function handleClick() {
-        let messageArray = [];
+    async function handleClick() {
         const content = document.getElementById("outText").value;
         if (content === "") {
             return;
         }
+
+
+        let autor = 'Bearer ' + props.token
+        console.log("curr user id is " + props.currentUser)
+        let userAdress = 'http://localhost:5000/api/Chats/' + props.currentUser + '/Messages'
+        const response = await fetch(userAdress, {
+                            method: 'POST',
+                            headers: {
+                                'accept': 'text/plain',
+                                'Authorization': autor,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                msg: content
+                                }),
+                            })
+
+            console.log("response msg status is " + response.status);
+
+
+
+
+
+
+
+
+
+        let messageArray = [];
+        
         const now = new Date();
         const date = now.toLocaleString();
 

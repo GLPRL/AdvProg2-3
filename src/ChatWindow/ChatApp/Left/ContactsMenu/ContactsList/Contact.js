@@ -14,7 +14,6 @@ function Contact(props) {
     <>
         <td><img src={ props.image } alt="" className="chat-profile-image rounded-circle"></img></td>
         <td className="chat-profile-name">{props.name}</td>
-        <td className="chat-date"><small>{props.lastMsgTime}</small></td>
     </>
     return (
         <tr className="table-info" onClick={()=>handleContactClick(props.id)}>

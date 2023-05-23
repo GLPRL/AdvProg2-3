@@ -8,7 +8,7 @@ import { useState } from "react";
 import userData from "../usersData"
 function ChatWindow({ setToken, token,user }) {
     const [idCount, setIdCount] = useState(0);
-    const [userContacts,setUserContact] = useState(null);
+    const [userContacts,setUserContacts] = useState([]);
     function handleIdCount() {
         setIdCount(idCount + 1);
     }
@@ -31,8 +31,8 @@ function ChatWindow({ setToken, token,user }) {
             </head>
 
             <Link to="/" role="button" className="btn-sm btn-danger logoutbutton text" onClick={onClickLogout}>Logout</Link>
-            <ChatApp user={user} token={token}/>
-            <AddContactModal idCount={idCount} handleIdCount={handleIdCount} token={token}/>
+            <ChatApp user={user} token={token} userContacts={userContacts}/>
+            <AddContactModal idCount={idCount} handleIdCount={handleIdCount} token={token} setUserContacts={setUserContacts}/>
         </>
     )
 }

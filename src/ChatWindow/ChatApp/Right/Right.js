@@ -6,7 +6,7 @@ function Right(props) {
         <div className="contactBox border-right col-8">
             <ContactTab />
             <ChatMessages currentUser={props.currentUser} firstPrint={props.firstPrint} setfirstPrint={props.setfirstPrint}/>
-            <ChatInteraction currentUser={props.currentUser} firstPrint={props.firstPrint} setfirstPrint={props.setfirstPrint} msgChangeHandler={props.msgChangeHandler}/>
+            <ChatInteraction currentUser={props.currentUser} token={props.token} firstPrint={props.firstPrint} setfirstPrint={props.setfirstPrint} msgChangeHandler={props.msgChangeHandler}/>
         </div>
     );
 }

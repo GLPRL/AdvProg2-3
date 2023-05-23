@@ -14,8 +14,8 @@ function ChatApp(props) {
     },[currentUser]);
     return (
         <div className="container content row no-gutters text">
-            <Left setCurrentUser={setCurrentUser} user={props.user} token={props.token} setCurrentChatId={setCurrentChatId}/>
-            <Right currentUser={currentUser} firstPrint={firstPrint} setfirstPrint={setfirstPrint} msgChangeHandler={msgChangeHandler}/>
+            <Left setCurrentUser={setCurrentUser} user={props.user} userContacts={props.userContacts} token={props.token} setCurrentChatId={setCurrentChatId}/>
+            <Right currentUser={currentUser} firstPrint={firstPrint} userContacts={props.userContacts} token={props.token} setfirstPrint={setfirstPrint} msgChangeHandler={msgChangeHandler}/>
         </div>
     );
 }

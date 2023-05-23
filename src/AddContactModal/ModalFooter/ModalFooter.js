@@ -10,10 +10,6 @@ function ModalFooter(props) {
             document.getElementById("modalInput").value = "";
             return;
         }
-        document.getElementById("modalInput").value = "";
-        const newContact = {id:props.idCount, name:inputValue,lastMsgTime:'', messages:[]};
-        props.handleIdCount();
-        const len = userData.push(newContact);
         let autor = 'Bearer ' + props.token
         let postResult = fetch('http://localhost:5000/api/Chats', {
                     method: 'POST',
@@ -38,6 +34,7 @@ function ModalFooter(props) {
                         }
                     })
                         const contacts = await response.json();
+                        props.setUserContacts(contacts);
                     }
                     
                 })
