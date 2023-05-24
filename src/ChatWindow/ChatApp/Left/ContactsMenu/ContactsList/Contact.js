@@ -22,9 +22,11 @@ function Contact(props) {
     }
     
     
-    let lastMsgDate = ""
+    let lastMsgDate = null
     if (props.contactIdAndTime[0] == props.id) {
         lastMsgDate = props.contactIdAndTime[1]
+    } else {
+        lastMsgDate = props.lastMsgTime
     }
     const contact =
     <>
