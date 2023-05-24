@@ -1,32 +1,53 @@
 import userData from "../../../../usersData";
 import React from "react";
 function ChatInteraction(props) {
-    function handleClick() {
-        let messageArray = [];
+    async function handleClick() {
         const content = document.getElementById("outText").value;
         if (content === "") {
             return;
         }
-        const now = new Date();
-        const date = now.toLocaleString();
 
-        const msgsConvo = userData.find(item => {
-            if (item.id === props.currentUser) {
-                messageArray = item.messages;
-            }});
+        let autor = 'Bearer ' + props.token
+        console.log("curr user id is " + props.currentUser)
+        let userAdress = 'http://localhost:5000/api/Chats/' + props.currentUser + '/Messages'
+        const response = await fetch(userAdress, {
+                            method: 'POST',
+                            headers: {
+                                'accept': 'text/plain',
+                                'Authorization': autor,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                msg: content
+                                }),
+                            })
 
-        const currentUserIndex = userData.findIndex(item => item.id === props.currentUser)
-        if (currentUserIndex < 0)
-        {
-            alert("Invalid user!");
-            document.getElementById("outText").value = "";
-            return;
-        }
-        userData[currentUserIndex].lastMsgTime = date;
+            const responseGet = await fetch(userAdress,{
+                method: 'GET',
+                headers: {
+                    'Authorization': autor,
+                    'accept': 'text/plain',
+                }
+            })
+                const contactMessages = await responseGet.json();
+                props.setCurrentContactMsgs(contactMessages);
+                props.setContactIdAndTime([props.currentUser, contactMessages[0].created])
+
+            const responseGetContacts = await fetch('http://localhost:5000/api/Chats/',{
+                method: 'GET',
+                headers: {
+                    'Authorization': autor,
+                    'accept': 'text/plain',
+                }
+            })
+            const contacts = await responseGetContacts.json();
+            props.setUserContacts(contacts);
+
+                
+            
+
         const newMsg = {text: content, floatValue: "float-right"};
-        messageArray.push(newMsg);
         document.getElementById("outText").value = "";
-        props.msgChangeHandler();
     }
     return(
         <div className="sendLine">
