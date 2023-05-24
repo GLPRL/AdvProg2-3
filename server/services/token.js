@@ -21,6 +21,16 @@ const getToken= async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+const isValidToken =async(token) =>{
+    try {
+        const testToken = jwt.verify(token, 'key');
+
+    } catch (err) {
+        return false;
+    }
+    return true;
+
+}
 module.exports={
-    getToken
+    getToken,isValidToken
 }
