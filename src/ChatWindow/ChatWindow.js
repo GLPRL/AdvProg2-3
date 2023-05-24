@@ -34,7 +34,8 @@ function ChatWindow({ setToken, token,user }) {
             </head>
 
             <Link to="/" role="button" className="btn-sm btn-danger logoutbutton text" onClick={onClickLogout}>Logout</Link>
-            <ChatApp setCurrentContactDisplayName={setCurrentContactDisplayName} currentContactDisplayName={currentContactDisplayName} currentContactImage={currentContactImage} setCurrentContactImage={setCurrentContactImage} user={user} token={token} userContacts={userContacts} setUserContacts={setUserContacts}/>
+            <ChatApp setCurrentContactDisplayName={setCurrentContactDisplayName} currentContactDisplayName={currentContactDisplayName} currentContactImage={currentContactImage} 
+                    setCurrentContactImage={setCurrentContactImage} user={user} token={token} userContacts={userContacts} setUserContacts={setUserContacts}/>
             <AddContactModal idCount={idCount} handleIdCount={handleIdCount} token={token} setUserContacts={setUserContacts}/>
         </>
     )

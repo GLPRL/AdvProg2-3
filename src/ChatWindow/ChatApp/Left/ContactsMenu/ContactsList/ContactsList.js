@@ -27,11 +27,17 @@ function ContactsList(props) {
         const allContacts = contacts.map((contact, key) => {
             if (contact.lastMessage == null) {
                 return (
-                    <Contact lastMsgTime=' ' contactIdAndTime={props.contactIdAndTime} setCurrentContactDisplayName={props.setCurrentContactDisplayName} setCurrentContactImage={props.setCurrentContactImage} token={props.token} name={contact.user.displayName} id={contact.id} key={key} setCurrentContactMsgs={props.setCurrentContactMsgs} setCurrentUser={props.setCurrentUser} image={contact.user.profilePic}></Contact>
+                    <Contact lastMsgTime=' ' contactIdAndTime={props.contactIdAndTime} 
+                            setCurrentContactDisplayName={props.setCurrentContactDisplayName} setCurrentContactImage={props.setCurrentContactImage} 
+                            token={props.token} name={contact.user.displayName} id={contact.id} key={key} setCurrentContactMsgs={props.setCurrentContactMsgs} setCurrentUser={props.setCurrentUser} 
+                            image={contact.user.profilePic}></Contact>
                 )
             } else {
                 return (
-                    <Contact lastMsgTime={contact.lastMessage.created} contactIdAndTime={props.contactIdAndTime} setCurrentContactDisplayName={props.setCurrentContactDisplayName} setCurrentContactImage={props.setCurrentContactImage} token={props.token} name={contact.user.displayName} id={contact.id} key={key} setCurrentContactMsgs={props.setCurrentContactMsgs} setCurrentUser={props.setCurrentUser} image={contact.user.profilePic}></Contact>
+                    <Contact lastMsgTime={contact.lastMessage.created} contactIdAndTime={props.contactIdAndTime} 
+                            setCurrentContactDisplayName={props.setCurrentContactDisplayName} setCurrentContactImage={props.setCurrentContactImage} 
+                            token={props.token} name={contact.user.displayName} id={contact.id} key={key} setCurrentContactMsgs={props.setCurrentContactMsgs} 
+                            setCurrentUser={props.setCurrentUser} image={contact.user.profilePic}></Contact>
                 )
                 
             }
