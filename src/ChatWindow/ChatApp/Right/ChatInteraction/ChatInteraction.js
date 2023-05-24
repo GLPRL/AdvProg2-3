@@ -33,6 +33,16 @@ function ChatInteraction(props) {
                 props.setCurrentContactMsgs(contactMessages);
                 props.setContactIdAndTime([props.currentUser, contactMessages[0].created])
 
+            const responseGetContacts = await fetch('http://localhost:5000/api/Chats/',{
+                method: 'GET',
+                headers: {
+                    'Authorization': autor,
+                    'accept': 'text/plain',
+                }
+            })
+            const contacts = await responseGetContacts.json();
+            props.setUserContacts(contacts);
+
                 
             
 

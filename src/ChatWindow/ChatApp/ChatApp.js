@@ -21,7 +21,9 @@ function ChatApp(props) {
             <Right setContactIdAndTime={setContactIdAndTime} currentContactDisplayName={props.currentContactDisplayName} 
                    currentContactMsgs={currentContactMsgs} currentContactImage={props.currentContactImage} 
                    currentUser={currentUser} user={props.user} firstPrint={firstPrint} userContacts={props.userContacts} 
-                   token={props.token} setfirstPrint={setfirstPrint} setCurrentContactMsgs={setCurrentContactMsgs} />
+                   token={props.token} setfirstPrint={setfirstPrint} setCurrentContactMsgs={setCurrentContactMsgs} 
+                   setUserContacts={props.setUserContacts}
+                   />
         </div>
     );
 }
