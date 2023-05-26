@@ -1,12 +1,21 @@
+const mongoose = require('mongoose');
 const Chat = require('../models/chats');
-const createChat= async (username) =>{
-        const chat = new Chat ({username: username});
+
+const createChat= async (chatId, currentUser, contactUser, contactDisplayName, contactProfilePic) =>{
+
+        const userChatCollection = mongoose.model(currentUser, Chat.schema, currentUser);
+        const contactDetails = {username: contactUser, displayName: contactDisplayName, profilePic: contactProfilePic}
+        console.log(contactDetails)
+        const chat = new userChatCollection({_id: chatId,user: contactDetails},);
         return await chat.save();
 }
 
 const getChat = async (id) => {
-        
+
 }
 
 
-module.exports = {createChat};
+module.exports = {
+        createChat,
+        getChat
+        };

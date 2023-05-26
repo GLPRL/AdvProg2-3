@@ -4,6 +4,6 @@ const express = require('express');
 
 const router = express.Router();
 
-router.post('/', chatController.createUser);
-router.get('/', chatController.createUser);
+router.post('/', chatController.createChat);
+router.get('/:id', chatController.getChat);
 module.exports = router;

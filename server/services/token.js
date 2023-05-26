@@ -31,6 +31,17 @@ const isValidToken =async(token) =>{
     return true;
 
 }
+
+const isValidTokenWithDetails =async(token) =>{
+    let testToken
+    try {
+        testToken = jwt.verify(token, 'key');
+    } catch (err) {
+        return false;
+    }
+    return testToken;
+
+}
 module.exports={
-    getToken,isValidToken
+    getToken,isValidToken, isValidTokenWithDetails
 }

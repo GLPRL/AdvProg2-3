@@ -47,8 +47,10 @@ async function nextId(idName) {
     const nextId = await ids.findOneAndUpdate({name: idName}, {$inc: {currentId: 1}}, {new: true})
     if (nextId) {
         console.log("current id for " + idName + " is : " + nextId.currentId)
+        return nextId.currentId;
     }
-    return nextId;
+    return nextId.currentId;
+
 }
 
 module.exports = {

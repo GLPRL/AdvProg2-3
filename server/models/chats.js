@@ -4,44 +4,45 @@ const mongoose = require('mongoose');
 const contactSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true
+        required: false
     },
     displayName: {
         type: String,
-        required: true
+        required: false
     },
     profilePic: {
-        type: Image,
+        type: String,
         required: false
     }
 })
 
 const lastMsgSchema = new mongoose.Schema({
-    id: {
+    _id: {
         type: Number,
-        required: true
+        required: false
     },
     created: {
         type: Date,
-        required:true
+        required:false
     },
     content: {
         type: String,
-        required:true
+        required:false
     }
 })
 
 const chatSchema = new mongoose.Schema({
-    id: {
+    _id: {
         type: Number,
-        required: true
+        required: false
     },
     user: {
         type: contactSchema,
-        required: true
+        required: false
     },
     lastMessage: {
         type:lastMsgSchema,
+        default: null,
         required: false
     },
 });
