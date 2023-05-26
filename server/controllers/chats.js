@@ -23,10 +23,14 @@ const createChat = async (req, res) => {
     console.log(chatId);
     const currentUser = validity.username
     const chatContact = await userGetter.findOne({username: req.body.username})
-    const chatUser = await userGetter.findOne({username: currentUser})
-    
-    const addChatToContact = await chatService.createChat(chatId, req.body.username ,currentUser, chatUser.displayName, chatUser.profilePic);
-    res.json(await chatService.createChat(chatId, currentUser ,req.body.username, chatContact.displayName, chatContact.profilePic));
+    if (chatContact == null) {
+        console.log("user doesnt exist!");
+        res.status(401).send();
+    } else {
+        const chatUser = await userGetter.findOne({username: currentUser})
+        const addChatToContact = await chatService.createChat(chatId, req.body.username ,currentUser, chatUser.displayName, chatUser.profilePic);
+        res.json(await chatService.createChat(chatId, currentUser ,req.body.username, chatContact.displayName, chatContact.profilePic));
+    }
 }
 
 
