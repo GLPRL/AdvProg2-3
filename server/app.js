@@ -27,6 +27,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatApp', {
 
 app.post('/api/Tokens',tokenService.getToken);
 
+// checking if idCollection exists, if not, creates it.
 idColl.checkIdCollection();
+
+// just testing id increments to later use inside controllers
+idColl.nextId('messages');
+idColl.nextId('chats');
 
 app.listen(5000);
