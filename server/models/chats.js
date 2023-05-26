@@ -1,21 +1,6 @@
 const mongoose = require('mongoose');
 
 
-const contactSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: false
-    },
-    displayName: {
-        type: String,
-        required: false
-    },
-    profilePic: {
-        type: String,
-        required: false
-    }
-})
-
 const lastMsgSchema = new mongoose.Schema({
     _id: {
         type: Number,
