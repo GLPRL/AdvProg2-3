@@ -21,8 +21,11 @@ const createChat = async (req, res) => {
     //console.log("current user is -- > " + validity.username)
     const chatId = await idGetter.nextId("chats");
     console.log(chatId);
-    const chatContact = await userGetter.findOne({username: req.body.username})
     const currentUser = validity.username
+    const chatContact = await userGetter.findOne({username: req.body.username})
+    const chatUser = await userGetter.findOne({username: currentUser})
+    
+    const addChatToContact = await chatService.createChat(chatId, req.body.username ,currentUser, chatUser.displayName, chatUser.profilePic);
     res.json(await chatService.createChat(chatId, currentUser ,req.body.username, chatContact.displayName, chatContact.profilePic));
 }
 
