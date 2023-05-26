@@ -37,8 +37,18 @@ const chatSchema = new mongoose.Schema({
         required: false
     },
     user: {
-        type: contactSchema,
-        required: false
+        username: {
+            type: String,
+            required: false
+        },
+        displayName: {
+            type: String,
+            required: false
+        },
+        profilePic: {
+            type: String,
+            required: false
+        }
     },
     lastMessage: {
         type:lastMsgSchema,
