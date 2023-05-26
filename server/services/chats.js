@@ -4,4 +4,9 @@ const createChat= async (username) =>{
         return await chat.save();
 }
 
+const getChat = async (id) => {
+        
+}
+
+
 module.exports = {createChat};

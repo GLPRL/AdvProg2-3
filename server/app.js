@@ -3,15 +3,18 @@ const mongoose = require('mongoose');
 const express=require("express");
 const bodyParser=require("body-parser");
 const usersRouter = require('./routes/users');
-const chatsRouter = require('./routes/chats');
 const cors = require('cors');
 const app = express();
 const tokenService = require('./services/token');
+const idColl = require('./models/ids');
+
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/api/Users',usersRouter);
-app.use('/api/Chats',chatsRouter);
+
+
 mongoose.connect('mongodb://127.0.0.1:27017/chatApp', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -23,5 +26,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatApp', {
     });
 
 app.post('/api/Tokens',tokenService.getToken);
+
+idColl.checkIdCollection();
 
 app.listen(5000);
