@@ -42,7 +42,7 @@ const getChat = async (chatId, firstUsername) => {
                         tempProfilePic = userTwoDetails.profilePic;
                 }
                 
-                newMsgsArray[i] = {
+                let msgDetails = {
                         id: msgsArray[i]._id, 
                         created: msgsArray[i].created,
                         sender: {
@@ -52,6 +52,7 @@ const getChat = async (chatId, firstUsername) => {
                         },
                         content: msgsArray[i].content
                 }
+                newMsgsArray.push(msgDetails)
         }
 
         const resVal = {
