@@ -42,6 +42,7 @@ const getMessages = async(req, res) => {
         res.status(401).send();
     }
 
+    console.log(req.params.id + " ----> IN getMessages of Controller")
     res.json(await messageService.getMessages(req.params.id));
 }
 
