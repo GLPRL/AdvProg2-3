@@ -46,7 +46,21 @@ const createChat = async (req, res) => {
 
 const getChat = async (req, res) => {
     console.log("in getChat")
-    res.json(await chatService.getChat(req.body));
+
+    if(!req.headers.authorization){
+        console.log("im in the reqheaders")
+       return res.status(401).send();
+    }
+    console.log("im near token");
+    const token = req.headers.authorization.split(' ')[1]
+    const validity =  await tokenVerifer.isValidTokenWithDetails(token)
+    if(!validity){
+        console.log("the token is invalid!");
+        res.status(401).send();
+    }
+
+    const chatId = req.params.id
+    res.json(await chatService.getChat(chatId));
 }
 
 
