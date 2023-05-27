@@ -27,11 +27,11 @@ const getChat = async (chatId, firstUsername) => {
         const userTwoDetails = await User.findOne({username: user2})
 
         const messagesModel = mongoose.model('messages', Messages.schema, 'messages');
-        const msgsOfChat = await messagesModel.findOne({_id: chatId});
+        const msgsOfChat = await messagesModel.findOne({_id: chatId}).exec();
         const msgsArray = msgsOfChat.messages
         const newMsgsArray = []
 
-        for (let i = 0; i < msgsArray.length(); i++) {
+        for (let i = 0; i < msgsArray.length; i++) {
                 let tempDisplayName = null;
                 let tempProfilePic = null;
                 if (msgsArray[i].sender.username == user1) {
