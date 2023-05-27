@@ -6,14 +6,13 @@ const allMessagesSchema = new mongoose.Schema({
         required: false
     },
     messages: {
-        _id: {
+        type: [ {_id: {
             type: Number,
             required: false
         },
         created: {
             type: Date,
             required:false,
-            default: Date()
         },
         sender: {
             username: {
@@ -24,7 +23,8 @@ const allMessagesSchema = new mongoose.Schema({
         content: {
             type: String,
             required:false
-        }
+        } } ],
+        default: []
     }
 })
 

@@ -32,7 +32,7 @@ const createChat = async (req, res) => {
         const chatUser = await userGetter.findOne({username: currentUser})
         const addChatToContact = await chatService.createChat(chatId, req.body.username ,currentUser, chatUser.displayName, chatUser.profilePic);
         const chatMsgCollection = mongoose.model('messages', Message.schema, 'messages');
-        const msg = new chatMsgCollection({_id: chatId, messages: []})
+        const msg = new chatMsgCollection({_id: chatId, messages: null})
         const temp = await msg.save();
         res.json(await chatService.createChat(chatId, currentUser ,req.body.username, chatContact.displayName, chatContact.profilePic));
     }
