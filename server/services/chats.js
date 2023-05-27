@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Chat = require('../models/chats');
 
 const createChat= async (chatId, currentUser, contactUser, contactDisplayName, contactProfilePic) =>{
-
+        console.log("in createmsg in msgservice")
         const userChatCollection = mongoose.model(currentUser, Chat.schema, currentUser);
         const contactDetails = {username: contactUser, displayName: contactDisplayName, profilePic: contactProfilePic}
-        console.log(contactDetails)
+        //console.log(contactDetails)
         const chat = new userChatCollection({_id: chatId,user: contactDetails},);
         return await chat.save();
 }
