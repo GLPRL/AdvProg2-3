@@ -6,7 +6,7 @@ const createChat= async (chatId, currentUser, contactUser, contactDisplayName, c
         const userChatCollection = mongoose.model(currentUser, Chat.schema, currentUser);
         const contactDetails = {username: contactUser, displayName: contactDisplayName, profilePic: contactProfilePic}
         console.log(contactDetails)
-        const chat = new userChatCollection({id: chatId,user: contactDetails},);
+        const chat = new userChatCollection({_id: chatId,user: contactDetails},);
         return await chat.save();
 }
 
@@ -17,7 +17,7 @@ const getChat = async (id) => {
 const getChats = async (username) => {
         const userChatCollection = mongoose.model(username, Chat.schema, username);
         const temp = await userChatCollection.collection.find().toArray();
-        console.log(temp)
+        // console.log(temp)
         return (temp)
 }
 

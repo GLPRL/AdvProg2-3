@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 const lastMsgSchema = new mongoose.Schema({
-    id: {
+    _id: {
         type: Number,
         required: false
     },
@@ -17,7 +17,7 @@ const lastMsgSchema = new mongoose.Schema({
 })
 
 const chatSchema = new mongoose.Schema({
-    id: {
+    _id: {
         type: Number,
         required: false
     },
