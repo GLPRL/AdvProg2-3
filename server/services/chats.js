@@ -77,9 +77,45 @@ const getChat = async (chatId, firstUsername) => {
 
 const getChats = async (username) => {
         const userChatCollection = mongoose.model(username, Chat.schema, username);
-        const temp = await userChatCollection.collection.find().toArray();
+        const temp = await userChatCollection.find().exec();
+
+        retChatsArray = [];
+        for (let i = 0; i < temp.length; i++) {
+                let lastMessage
+                if (temp[i].lastMessage != null) {
+                        tempChat =  {
+                                id : temp[i]._id,
+                                user : {
+                                        username : temp[i].user.username,
+                                        displayName : temp[i].user.displayName,
+                                        profilePic : temp[i].user.profilePic,
+                                },
+                                lastMessage: {
+                                        id : temp[i].lastMessage._id,
+                                        created : temp[i].lastMessage.created,
+                                        content : temp[i].lastMessage.content
+                                }
+        
+                        }
+                } else {
+                        tempChat =  {
+                                id : temp[i]._id,
+                                user : {
+                                        username : temp[i].user.username,
+                                        displayName : temp[i].user.displayName,
+                                        profilePic : temp[i].user.profilePic,
+                                },
+                                lastMessage: null
+                        }
+                }
+               
+                console.log("this is tempChat")
+                console.log(tempChat)
+                retChatsArray.push(tempChat);
+        }
+
         // console.log(temp)
-        return (temp)
+        return (retChatsArray)
 }
 
 
