@@ -9,4 +9,5 @@ router.post('/', chatController.createChat);
 router.get('/', chatController.getChats);
 router.get('/:id', chatController.getChat);        // didnt write the function for this yet!
 router.post('/:id/Messages', messageController.createMessage);
+router.get('/:id/Messages', messageController.getMessages);
 module.exports = router;

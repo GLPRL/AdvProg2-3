@@ -3,7 +3,7 @@ const Message = require('../models/messages');
 const User = require('../models/users');
 
 const createMessage= async (chatId, currentUser, messageContent, messageId) =>{
-    console.log("in createmsg in msgservice")
+    //console.log("in createmsg in msgservice")
     const messagesModel = mongoose.model('messages', Message.schema, 'messages');
  
     const userMessages = await messagesModel.findById(chatId)
@@ -22,7 +22,16 @@ const createMessage= async (chatId, currentUser, messageContent, messageId) =>{
     return resData
 }
 
+const getMessages = async (chatId) =>{
+    const messagesModel = mongoose.model('messages', Message.schema, 'messages');
+    const userMessages = await messagesModel.findById(chatId)
+    const msgsArray = userMessages.messages
+    console.log(msgsArray);
+}
+
+
 
 module.exports = {
-    createMessage
+    createMessage,
+    getMessages
     };

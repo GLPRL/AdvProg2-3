@@ -19,15 +19,33 @@ const createMessage = async (req, res) => {
     }
 
     const messageId = await idGetter.nextId("messages");
-    console.log(messageId);
+    //console.log(messageId);
     const messageContent = req.body.msg
-    console.log(messageContent);
+    //console.log(messageContent);
     const chatId = req.params.id
-    console.log(chatId);
+    //console.log(chatId);
     res.json(await messageService.createMessage(chatId , currentUser, messageContent, messageId));
 
 }
 
+const getMessages = async(req, res) => {
+    if(!req.headers.authorization){
+        console.log("im in the reqheaders")
+       return res.status(401).send();
+    }
+    console.log("im near token");
+    const token = req.headers.authorization.split(' ')[1]
+    const validity =  await tokenVerifer.isValidTokenWithDetails(token)
+
+    if(!validity){
+        console.log("the token is invalid!");
+        res.status(401).send();
+    }
+
+    res.json(await messageService.getMessages(req.params.id));
+}
+
 module.exports = {
-    createMessage
+    createMessage,
+    getMessages
 };
