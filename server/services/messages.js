@@ -25,7 +25,7 @@ const createMessage= async (chatId, currentUser, messageContent, messageId) =>{
     await userMessages.save();
 
     const updateData = {idOfChat: chatId, idOfMessage: messageId, sender: {username:currentUser}, created: currDate, content: messageContent}
-    //await updateLastMessages(updateData);
+    await updateLastMessages(updateData);
     return resData
 }
 

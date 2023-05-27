@@ -73,8 +73,13 @@ const getChats = async(req,res) => {
     res.json(collection)
 }
 
+const removeChat = async(req,res) => {
+
+}
+
 module.exports = {
     createChat,
     getChat,
-    getChats
+    getChats,
+    removeChat
 };
