@@ -44,7 +44,18 @@ const getChat = async (req, res) => {
     res.json(await chatService.getChat(req.body));
 }
 
+
+const getChats = async(req,res) => {
+    console.log("in getchatSSS")
+    const token = req.headers.authorization.split(' ')[1]
+    const validity =  await tokenVerifer.isValidTokenWithDetails(token)
+    const collection = await chatService.getChats(validity.username)
+    console.log(collection)
+    res.json(collection)
+}
+
 module.exports = {
     createChat,
-    getChat
+    getChat,
+    getChats
 };
