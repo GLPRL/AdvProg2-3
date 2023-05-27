@@ -23,8 +23,8 @@ const createMessage = async (req, res) => {
     const messageContent = req.body.msg
     console.log(messageContent);
     const chatId = req.params.id
-    console.log(req.params);
-    res.json(await messageService.createChat(chatId , currentUser, messageContent, messageId));
+    console.log(chatId);
+    res.json(await messageService.createMessage(chatId , currentUser, messageContent, messageId));
 
 }
 

@@ -1,7 +1,9 @@
+const mongoose = require('mongoose');
 const chatService = require('../services/chats')
 const tokenVerifer = require('../services/token')
 const idGetter = require('../models/ids')
 const userGetter = require('../models/users')
+const Message = require('../models/messages');
 
 const createChat = async (req, res) => {
 
@@ -29,6 +31,9 @@ const createChat = async (req, res) => {
     } else {
         const chatUser = await userGetter.findOne({username: currentUser})
         const addChatToContact = await chatService.createChat(chatId, req.body.username ,currentUser, chatUser.displayName, chatUser.profilePic);
+        const chatMsgCollection = mongoose.model('messages', Message.schema, 'messages');
+        const msg = new chatMsgCollection({_id: chatId, messages: []})
+        const temp = await msg.save();
         res.json(await chatService.createChat(chatId, currentUser ,req.body.username, chatContact.displayName, chatContact.profilePic));
     }
 }

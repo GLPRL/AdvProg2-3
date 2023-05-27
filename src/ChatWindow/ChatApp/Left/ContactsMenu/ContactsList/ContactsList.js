@@ -13,7 +13,9 @@ function ContactsList(props) {
                     'accept': 'text/plain',
                 }
             })
+                
                 const contacts = await response.json();
+                console.log(contacts)
                 props.setUserContacts(contacts);
         }
 
@@ -29,7 +31,7 @@ function ContactsList(props) {
                 return (
                     <Contact lastMsgTime=' ' contactIdAndTime={props.contactIdAndTime} 
                             setCurrentContactDisplayName={props.setCurrentContactDisplayName} setCurrentContactImage={props.setCurrentContactImage} 
-                            token={props.token} name={contact.user.displayName} id={contact.id} key={key} setCurrentContactMsgs={props.setCurrentContactMsgs} setCurrentUser={props.setCurrentUser} 
+                            token={props.token} name={contact.user.displayName} id={contact._id} key={key} setCurrentContactMsgs={props.setCurrentContactMsgs} setCurrentUser={props.setCurrentUser} 
                             image={contact.user.profilePic}></Contact>
                 )
             } else {
