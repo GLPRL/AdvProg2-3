@@ -1,6 +1,6 @@
 const messageService = require('../services/messages')
 const tokenVerifer = require('../services/token')
-const idGetter = require('../models/ids')
+const idGetter = require('../services/ids')
 const userGetter = require('../models/users')
 
 const createMessage = async (req, res) => {

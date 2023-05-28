@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const chatService = require('../services/chats')
 const tokenVerifer = require('../services/token')
-const idGetter = require('../models/ids')
+const idGetter = require('../services/ids')
 const userGetter = require('../models/users')
 const Message = require('../models/messages');
 
