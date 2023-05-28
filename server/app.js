@@ -7,6 +7,7 @@ const chatsRouter = require('./routes/chats');
 const cors = require('cors');
 const app = express();
 const tokenService = require('./services/token');
+const idService = require('./services/ids');
 const idColl = require('./models/ids');
 
 
@@ -30,10 +31,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatApp', {
 app.post('/api/Tokens',tokenService.getToken);
 
 // checking if idCollection exists, if not, creates it.
-idColl.checkIdCollection();
+idService.checkIdCollection();
 
 // just testing id increments to later use inside controllers
-idColl.nextId('messages');
-idColl.nextId('chats');
+//idService.nextId('messages');
+//idService.nextId('chats');
 
 app.listen(5000);
