@@ -9,9 +9,7 @@ const checkIdCollection = async () => {
     const isIdCollectionExists = await ids.exists();
     
     if (isIdCollectionExists) {
-        console.log("IdColl exists!")
     } else {
-        console.log("IdColl doesnt exist, creating idCollection with needed id's")
         const temp2 = await messageIdCreate();
         const temp1 = await chatIdCreate();
         
@@ -39,7 +37,6 @@ const nextId = async (idName) => {
     const ids = mongoose.model('idCollection', Id.idSchema, 'idCollection');
     const nextId = await ids.findOneAndUpdate({name: idName}, {$inc: {currentId: 1}}, {new: true})
     if (nextId) {
-        console.log("current id for " + idName + " is : " + nextId.currentId)
         return nextId.currentId;
     }
     return nextId.currentId;

@@ -8,7 +8,6 @@ const createChat= async (chatId, currentUser, contactUser, contactDisplayName, c
         const userChatCollection = mongoose.model(currentUser, Chat.schema, currentUser);
         
         const contactDetails = {username: contactUser, displayName: contactDisplayName, profilePic: contactProfilePic}
-        //console.log(contactDetails)
         const chat = new userChatCollection({_id: chatId,user: contactDetails},);
         return await chat.save();
 }
@@ -16,12 +15,9 @@ const createChat= async (chatId, currentUser, contactUser, contactDisplayName, c
 const getChat = async (chatId, firstUsername) => {
 
         const user1 = firstUsername;
-        //console.log(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        //console.log(user1)
         const userOneChatCollection = mongoose.model(user1, Chat.schema, user1);
         const chatDocInUser = await userOneChatCollection.findOne({_id:chatId})
         const user2 = chatDocInUser.user.username;
-        // const userTwoChatCollection = mongoose.model(user2, Chat.schema, user2);
 
         const userOneDetails = await User.findOne({username: user1})
         const userTwoDetails = await User.findOne({username: user2})
@@ -108,13 +104,9 @@ const getChats = async (username) => {
                                 lastMessage: null
                         }
                 }
-               
-                console.log("this is tempChat")
-                console.log(tempChat)
                 retChatsArray.push(tempChat);
         }
 
-        // console.log(temp)
         return (retChatsArray)
 }
 

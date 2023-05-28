@@ -8,25 +8,18 @@ const Message = require('../models/messages');
 const createChat = async (req, res) => {
 
     if(!req.headers.authorization){
-        console.log("im in the reqheaders")
        return res.status(401).send();
     }
-    console.log("im near token");
     const token = req.headers.authorization.split(' ')[1]
     const validity =  await tokenVerifer.isValidTokenWithDetails(token)
     if(!validity){
-        console.log("the token is invalid!");
         res.status(401).send();
     }
 
-    //console.log("token IS VALID")
-    //console.log("current user is -- > " + validity.username)
     const chatId = await idGetter.nextId("chats");
-    console.log(chatId);
     const currentUser = validity.username
     const chatContact = await userGetter.findOne({username: req.body.username})
     if (chatContact == null) {
-        console.log("user doesnt exist!");
         res.status(401).send();
     } else {
         const chatUser = await userGetter.findOne({username: currentUser})
@@ -45,17 +38,14 @@ const createChat = async (req, res) => {
 
 
 const getChat = async (req, res) => {
-    console.log("in getChat")
 
     if(!req.headers.authorization){
-        console.log("im in the reqheaders")
        return res.status(401).send();
     }
     console.log("im near token");
     const token = req.headers.authorization.split(' ')[1]
     const validity =  await tokenVerifer.isValidTokenWithDetails(token)
     if(!validity){
-        console.log("the token is invalid!");
         res.status(401).send();
     }
 
@@ -65,11 +55,9 @@ const getChat = async (req, res) => {
 
 
 const getChats = async(req,res) => {
-    console.log("in getchatSSS")
     const token = req.headers.authorization.split(' ')[1]
     const validity =  await tokenVerifer.isValidTokenWithDetails(token)
     const collection = await chatService.getChats(validity.username)
-    //console.log(collection)
     res.json(collection)
 }
 
