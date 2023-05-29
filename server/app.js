@@ -1,17 +1,20 @@
 const mongoose = require('mongoose');
-const express = require("express");
 const bodyParser=require("body-parser");
 const usersRouter = require('./routes/users');
 const chatsRouter = require('./routes/chats');
 const cors = require('cors');
-const app = express();
 const tokenService = require('./services/token');
 const idService = require('./services/ids');
-const server = require("http").createServer(app);
+
+const express = require("express");
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-app.use(express.static("public"))
+app.use(express.static('public'))
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -31,11 +34,18 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatApp', {
 
 app.post('/api/Tokens',tokenService.getToken);
 
+app.get()
 // checking if idCollection exists, if not, creates it.
 idService.checkIdCollection();
 
 io.on("connection", (socket) => {
+    console.log("New Connection")
 
+    io.emit("NEW CONNECTION")
+    socket.on("message", () => {
+        console.log("pog")
+    })
 })
-
-server.listen(5000);
+server.listen(3000, () => {
+    console.log("Server online")
+});
