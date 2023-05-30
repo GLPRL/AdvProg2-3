@@ -9,7 +9,7 @@ import React, { useState } from "react";
 function ChatWindow({ setToken, token,user }) {
     const [idCount, setIdCount] = useState(0);
     const [userContacts,setUserContacts] = useState([]);
-    const [currentContactImage, setCurrentContactImage] = useState(null)
+    const [currentContactImage, setCurrentContactImage] = useState("")
     const [currentContactDisplayName, setCurrentContactDisplayName] = useState(null);
 
     function handleIdCount() {

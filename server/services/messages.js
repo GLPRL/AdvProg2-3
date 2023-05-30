@@ -12,6 +12,7 @@ const createMessage= async (chatId, currentUser, messageContent, messageId) =>{
     if (userMessages.messages == null) {
         userMessages.messages = []
     }
+
     userMessages.messages.unshift(messageDetails);
 
     const user =await User.findOne({username: currentUser});

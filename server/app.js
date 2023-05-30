@@ -34,9 +34,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatApp', {
 
 app.post('/api/Tokens',tokenService.getToken);
 app.use(express.static(join(__dirname, "..", "build")));
-//app.get("/", (req, res) => {
-//    res.send( join(__dirname, '..', 'public', 'index.html') )
-//})
+
 // checking if idCollection exists, if not, creates it.
 idService.checkIdCollection();
 

@@ -1,4 +1,3 @@
-import userData from "../../../../usersData";
 import React from "react";
 function ChatInteraction(props) {
     async function handleClick() {
@@ -6,7 +5,10 @@ function ChatInteraction(props) {
         if (content === "") {
             return;
         }
-        
+        const contactUser = document.getElementById("contactUser").value;
+        if (contactUser === "") {
+            return;
+        }
         let autor = 'Bearer ' + props.token
         console.log("curr user id is " + props.currentUser)
         let userAdress = 'http://localhost:5000/api/Chats/' + props.currentUser + '/Messages'
