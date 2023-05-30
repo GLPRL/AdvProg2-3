@@ -22,6 +22,7 @@ function ChatWindow({ setToken, token,user }) {
     if(!isLoggedIn.value) {
         return(<Navigate to="/" />)
     }
+
     return (
         <>
             <head>

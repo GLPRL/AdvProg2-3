@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-const bodyParser=require("body-parser");
+const bodyParser = require("body-parser");
 const usersRouter = require('./routes/users');
 const chatsRouter = require('./routes/chats');
+const messageCntrl = require('./controllers/messages')
 const cors = require('cors');
 const tokenService = require('./services/token');
 const idService = require('./services/ids');
@@ -43,6 +44,10 @@ io.on("connection", (socket) => {
     io.emit("hello", "there")
     socket.on("foo", (data) => {
         console.log(data)
+    })
+    socket.on("newMessage", () => {
+        console.log("newMessage");
+        messageCntrl.getMessages()
     })
 })
 
