@@ -4,8 +4,7 @@ import {isLoggedIn} from "../login/Login"
 import "../stylesheets/chatWindow.css"
 import AddContactModal from "../AddContactModal/AddContactModal";
 import userData from "../usersData"
-import io from "socket.io-client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function ChatWindow({ setToken, token,user }) {
     const [idCount, setIdCount] = useState(0);

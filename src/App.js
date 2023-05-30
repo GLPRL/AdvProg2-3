@@ -1,4 +1,3 @@
-//TODO: CLIENT
 import './App.css';
 import './stylesheets/chatWindow.css'
 import './stylesheets/login.css'
@@ -13,7 +12,9 @@ import {useState} from "react";
 function App() {
     const [token, setToken] = useState(null);
     const [user,setUser] =useState(null);
+
     return (
+
         <Router>
         <html lang="en">
             <Routes>
@@ -21,7 +22,7 @@ function App() {
                 <Route path="/register" element={<Register setToken={setToken} />} />
                 <Route path="/chat" element={<ChatWindow token={token} user={user} />} />
             </Routes>
-    </html>
+        </html>
         </Router>
     );
 }

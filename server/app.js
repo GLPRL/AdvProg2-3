@@ -11,6 +11,7 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
+const {join} = require("path");
 const io = new Server(server);
 
 app.use(express.static('public'))
@@ -20,7 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/api/Users',usersRouter);
 app.use('/api/Chats',chatsRouter);
-
 
 mongoose.connect('mongodb://127.0.0.1:27017/chatApp', {
     useNewUrlParser: true,
@@ -33,18 +33,21 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatApp', {
     });
 
 app.post('/api/Tokens',tokenService.getToken);
-
+app.use(express.static(join(__dirname, "..", "build")));
+//app.get("/", (req, res) => {
+//    res.send( join(__dirname, '..', 'public', 'index.html') )
+//})
 // checking if idCollection exists, if not, creates it.
 idService.checkIdCollection();
 
 io.on("connection", (socket) => {
     console.log("New Connection")
-
-    io.emit("NEW CONNECTION")
-    socket.on("message", () => {
-        console.log("pog")
+    io.emit("hello", "there")
+    socket.on("foo", (data) => {
+        console.log(data)
     })
 })
-server.listen(3000, () => {
+
+server.listen(5000, () => {
     console.log("Server online")
 });
