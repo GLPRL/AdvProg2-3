@@ -33,7 +33,7 @@ Download all of the files, extract them to a location of your choosing.
 **Everything must be in the same directory**
 
 ``` cd ``` into the location of the files, 
-
+```npm run build```
+and then
 ```cd server
-npm run build
 node app.js
