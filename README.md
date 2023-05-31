@@ -35,5 +35,7 @@ Download all of the files, extract them to a location of your choosing.
 ``` cd ``` into the location of the files, 
 
 ```cd server
+
 npm run build
-node app.js```
+
+node app.js
