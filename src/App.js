@@ -10,9 +10,9 @@ import ChatWindow from './ChatWindow/ChatWindow'
 import {useState} from "react";
 
 function App() {
+
     const [token, setToken] = useState(null);
     const [user, setUser] = useState(null);
-
     return (
         <Router>
             <html lang="en">

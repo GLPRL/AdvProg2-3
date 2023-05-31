@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 const usersRouter = require('./routes/users');
 const chatsRouter = require('./routes/chats');
-const messageCntrl = require('./controllers/messages')
 const cors = require('cors');
 const tokenService = require('./services/token');
 const idService = require('./services/ids');
@@ -13,7 +12,11 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const {join} = require("path");
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:5000",
+    }
+});
 
 app.use(express.static('public'))
 
@@ -45,9 +48,9 @@ io.on("connection", (socket) => {
     socket.on("foo", (data) => {
         console.log(data)
     })
-    socket.on("newMessage", () => {
-        console.log("newMessage");
-        messageCntrl.getMessages()
+    socket.on("newMessage", (chatID) => {
+        console.log("NEWMESSAGE");
+        socket.broadcast.emit("receiveMessage")
     })
 })
 

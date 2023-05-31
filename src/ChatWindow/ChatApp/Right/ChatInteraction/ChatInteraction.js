@@ -1,8 +1,10 @@
 import React from "react";
+import io from "socket.io-client"
+import { useEffect} from "react";
+export const socket = io.connect("http://localhost:5000")
 
 function ChatInteraction(props) {
     async function handleClick() {
-
         const content = document.getElementById("outText").value;
         if (content === "") {
             return;
@@ -12,9 +14,7 @@ function ChatInteraction(props) {
             return;
         }
         let autor = 'Bearer ' + props.token
-        console.log("curr user id is " + props.currentUser)
         let userAdress = 'http://localhost:5000/api/Chats/' + props.currentUser + '/Messages'
-        console.log("in ChatInteraction : " + userAdress)
         const response = await fetch(userAdress, {
             method: 'POST',
             headers: {
@@ -46,12 +46,19 @@ function ChatInteraction(props) {
             }
         })
         const contacts = await responseGetContacts.json();
-        console.log("CHAT ID AFTER SENDING MSG IS" + props.currentUser)
         props.setUserContacts(contacts);
         const newMsg = {text: content, floatValue: "float-right"};
         document.getElementById("outText").value = "";
+        socket.emit("newMessage", )
+
+
     }
 
+    useEffect(() => {
+        socket.on("receiveMessage", () => {
+            alert("MESSAGE RECEIVED");      //Gonna need to invoke the update chat function
+        })
+    }, [socket]);
     return (
         <div className="sendLine">
             <input type="text" id="outText" className="textOut"></input>

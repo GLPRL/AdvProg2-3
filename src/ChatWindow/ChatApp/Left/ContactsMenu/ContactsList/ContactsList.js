@@ -15,7 +15,6 @@ function ContactsList(props) {
             })
                 
                 const contacts = await response.json();
-                console.log(contacts)
                 props.setUserContacts(contacts);
         }
 
@@ -26,8 +25,6 @@ function ContactsList(props) {
 
         let lastMsgTimeDate = ' '
         const contacts = props.userContacts
-        console.log("printing contacts")
-        console.log(contacts)
         const allContacts = contacts.map((contact, key) => {
             if (contact.lastMessage == null) {
                 return (

@@ -42,7 +42,6 @@ const getChat = async (req, res) => {
     if(!req.headers.authorization){
        return res.status(401).send();
     }
-    console.log("im near token");
     const token = req.headers.authorization.split(' ')[1]
     const validity =  await tokenVerifer.isValidTokenWithDetails(token)
     if(!validity){

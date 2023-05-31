@@ -2,7 +2,6 @@ function Contact(props) {
 
     let date;
     async function handleContactClick() {
-        console.log("IN CONTANT.JS HandleClick  " + props.id)
         props.setCurrentUser(props.id);
         const contactUrl = 'http://localhost:5000/api/Chats/' + props.id + '/Messages'
         let autor = 'Bearer ' + props.token

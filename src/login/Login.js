@@ -30,7 +30,6 @@ function Login( { setToken,setUser}){
             })
         });
 
-        console.log('Response code:', response.status);
         if (response.status !== 200) {
             usernameError.current.textContent='Wrong username';
             passwordError.current.textContent='Wrong password';
@@ -40,7 +39,6 @@ function Login( { setToken,setUser}){
         const data = await response.text(); // Parse the response body as JSON
          setToken(data);
          setUser(username);
-         console.log(username);
         isLoggedIn.value = true;
         setShouldNavigate(true);
         reqUsername = username;
