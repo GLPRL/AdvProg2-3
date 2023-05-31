@@ -1,7 +1,7 @@
 import '../../../../stylesheets/chatWindow.css'
 import pic from '../../../../images/default.jpeg'
 function ContactTab(props) {
-    if (props.currentContactDisplayName === "") {
+    if (props.currentContactDisplayName === null) {
         return(
             <div className="userTab">
                 <img src= {pic} alt="" className="user-tab-right-image rounded-circle" id="contactImage"></img>
