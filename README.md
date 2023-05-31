@@ -32,4 +32,8 @@ How to use:
 Download all of the files, extract them to a location of your choosing.
 **Everything must be in the same directory**
 
-``` cd ``` into the location of the files, then run ``` npm start ```
+``` cd ``` into the location of the files, 
+
+```cd server
+npm run build
+node app.js```
