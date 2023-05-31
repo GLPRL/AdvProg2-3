@@ -44,6 +44,7 @@ idService.checkIdCollection();
 
 io.on("connection", (socket) => {
     console.log("New Connection")
+    console.log(socket.id);
     io.emit("hello", "there")
     socket.on("foo", (data) => {
         console.log(data)

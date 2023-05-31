@@ -3,7 +3,7 @@ import Right from "./Right/Right";
 import { useState } from "react";
 import { useEffect } from "react";
 function ChatApp(props) {
-    const [currentUser, setCurrentUser] = useState(1);
+    const [currentUser, setCurrentUser] = useState(null);
     const [firstPrint, setfirstPrint] = useState(true);
     const [currentChatId, setCurrentChatId] = useState(null);
     const [currentContactMsgs, setCurrentContactMsgs] = useState([])

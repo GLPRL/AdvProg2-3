@@ -5,6 +5,7 @@ export const socket = io.connect("http://localhost:5000")
 
 function ChatInteraction(props) {
     async function handleClick() {
+        console.log("CHATID IS: " + props.currentUser);
         const content = document.getElementById("outText").value;
         if (content === "") {
             return;
@@ -51,11 +52,15 @@ function ChatInteraction(props) {
         document.getElementById("outText").value = "";
         socket.emit("newMessage", props.currentUser);
     }
-
+    const chat = props.currentUser;
+    console.log("CHAT: " + chat)
     useEffect(() => {
         socket.on("receiveMessage", async (chatID) => {
-            console.log("MESSAGE RECEIVED");      //Gonna need to invoke the update chat function
-            if (props.currentUser == chatID) {
+            console.log("CHATID ISSSSSSS: " + chatID)
+            console.log("CHAT ISSSSS: " + chat);
+            console.log("MESSAGE RECEIVED");
+            if (chat == chatID) {
+                console.log("----PAST IF----")
                 let userAdress = 'http://localhost:5000/api/Chats/' + props.currentUser + '/Messages'
                 let autor = 'Bearer ' + props.token
                 const responseGet = await fetch(userAdress, {
