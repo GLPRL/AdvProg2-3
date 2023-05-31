@@ -49,14 +49,34 @@ function ChatInteraction(props) {
         props.setUserContacts(contacts);
         const newMsg = {text: content, floatValue: "float-right"};
         document.getElementById("outText").value = "";
-        socket.emit("newMessage", )
-
-
+        socket.emit("newMessage", props.currentUser);
     }
 
     useEffect(() => {
-        socket.on("receiveMessage", () => {
-            alert("MESSAGE RECEIVED");      //Gonna need to invoke the update chat function
+        socket.on("receiveMessage", async (chatID) => {
+            console.log("MESSAGE RECEIVED");      //Gonna need to invoke the update chat function
+            if (props.currentUser == chatID) {
+                let userAdress = 'http://localhost:5000/api/Chats/' + props.currentUser + '/Messages'
+                let autor = 'Bearer ' + props.token
+                const responseGet = await fetch(userAdress, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': autor,
+                        'accept': 'text/plain',
+                    }
+                })
+                const contactMessages = await responseGet.json();
+                props.setCurrentContactMsgs(contactMessages);
+                const responseGetContacts = await fetch('http://localhost:5000/api/Chats/', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': autor,
+                        'accept': 'text/plain',
+                    }
+                })
+                const contacts = await responseGetContacts.json();
+                props.setUserContacts(contacts);
+            }
         })
     }, [socket]);
     return (

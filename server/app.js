@@ -50,7 +50,7 @@ io.on("connection", (socket) => {
     })
     socket.on("newMessage", (chatID) => {
         console.log("NEWMESSAGE");
-        socket.broadcast.emit("receiveMessage")
+        socket.broadcast.emit("receiveMessage", chatID)
     })
 })
 
