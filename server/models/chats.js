@@ -7,7 +7,7 @@ const lastMsgSchema = new mongoose.Schema({
         required: false
     },
     created: {
-        type: Date,
+        type: String,
         required:false
     },
     content: {

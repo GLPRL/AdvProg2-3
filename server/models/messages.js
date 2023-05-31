@@ -11,7 +11,7 @@ const allMessagesSchema = new mongoose.Schema({
             required: false
         },
         created: {
-            type: Date,
+            type: String,
             required:false,
         },
         sender: {

@@ -7,7 +7,7 @@ const createMessage= async (chatId, currentUser, messageContent, messageId) =>{
     const messagesModel = mongoose.model('messages', Message.schema, 'messages');
 
     const userMessages = await messagesModel.findById(chatId)
-    const currDate = Date()
+    const currDate = new Date().toLocaleString();
     const messageDetails = {_id: messageId, sender: {username:currentUser}, created : currDate ,content: messageContent}
     if (userMessages.messages == null) {
         userMessages.messages = []
