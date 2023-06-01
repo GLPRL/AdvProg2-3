@@ -1,5 +1,6 @@
-import React, {useEffect} from "react";
+import React from "react";
 import io from "socket.io-client"
+import {useEffect} from "react";
 
 export const socket = io.connect("http://localhost:5000")
 
@@ -12,7 +13,6 @@ function ChatInteraction(props) {
         }
         const contactUser = document.getElementById("contactUser").value;
         if (contactUser === "") {
-            document.getElementById("outText").value = "";
             return;
         }
         let autor = 'Bearer ' + props.token
@@ -40,6 +40,30 @@ function ChatInteraction(props) {
         props.setCurrentContactMsgs(contactMessages);
         props.setContactIdAndTime([props.currentUser, contactMessages[0].created])
 
+        const newMsg = {text: content, floatValue: "float-right"};
+        document.getElementById("outText").value = "";
+        socket.emit("newMessage", props.currentUser);
+    }
+
+    const chat = props.currentUser;
+    useEffect(() => {
+        socket.on("receiveMessage", handleMessageReceived);
+
+        return () => {
+            socket.off("receiveMessage", handleMessageReceived);
+        };
+    }, [props.currentUser]);
+
+    const handleMessageReceived = async (chatID) => {
+        let autor = 'Bearer ' + props.token
+        let x= chatID-props.currentUser;
+        let p=x;
+        console.log("x is" + x);
+        console.log("CHATID ISSSSSSS: " + chatID)
+        console.log("CHAT ISSSSS: " + chat);
+        console.log("MESSAGE RECEIVED");
+        console.log("before if ChatID " + chatID)
+        console.log("before if  chat: " + chat);
         const responseGetContacts = await fetch('http://localhost:5000/api/Chats/', {
             method: 'GET',
             headers: {
@@ -47,53 +71,28 @@ function ChatInteraction(props) {
                 'accept': 'text/plain',
             }
         })
-        const contacts = await responseGetContacts.json();
+        const contacts = await responseGetContacts.json();  //->
         props.setUserContacts(contacts);
-        const newMsg = {text: content, floatValue: "float-right"};
-        document.getElementById("outText").value = "";
-        socket.emit("newMessage", props.currentUser);
-    }
-
-    const chat = props.currentUser;
-    console.log("CHAT: " + chat)
-
-    socket.on("receiveMessage", async (chatID) => {
-        console.log("CHATID ISSSSSSS: " + chatID)
-        console.log("CHAT ISSSSS: " + chat);
-        console.log("MESSAGE RECEIVED");
-        if (props.currentUser == chatID) {
+        if (props.currentUser === chatID  ) {
             console.log("----PAST IF----")
-            let userAdress = 'http://localhost:5000/api/Chats/' + props.currentUser + '/Messages'
-            let autor = 'Bearer ' + props.token
-            const responseGet = await fetch(userAdress, {
+            console.log("PAST IF CHATID ISSSSSSS: " + chatID)
+            console.log("PAST IF CHAT ISSSSS: " + chat);
+            let userAddress = 'http://localhost:5000/api/Chats/' + props.currentUser + '/Messages'
+
+            const responseGet = await fetch(userAddress, {
                 method: 'GET',
                 headers: {
                     'Authorization': autor,
                     'accept': 'text/plain',
                 }
             })
-            //if all 4 are active: if new chat, and msg is sent, the chat won't appear at dest.
-            //if user3 is in chat with user 2, and user1 is sending msg to user3, then it jumps to the user1+user3 chat
-            /*1*/const contactMessages = await responseGet.json();    //->     //if removed: cant run the next line
-            /*2*/props.setCurrentContactMsgs(contactMessages);        //->     //if removed: updates only time,
-                                                                            //and won't receive the new message or make the new chat at destination
+            const contactMessages = await responseGet.json();
+            if(props.currentUser === chatID && p===0 && x===0){
+                props.setCurrentContactMsgs(contactMessages);
+            }
 
-            //if both of them were removed, then: same as first line of the two
-            const responseGetContacts = await fetch('http://localhost:5000/api/Chats/', {
-                method: 'GET',
-                headers: {
-                    'Authorization': autor,
-                    'accept': 'text/plain',
-                }
-            })
-            /*1*/const contacts = await responseGetContacts.json();  //->    //if removed: cant run next line.
-            /*2*///props.setUserContacts(contacts);                  //->      //if removed: wont update contactslist, messages are displayed.
-                                                                //time is updated only at senders' side.
-                                //if both removed: same as 2nd line.
-
-            //IF ALL 4 ARE REMOVED: all effects combined
         }
-    })
+    }
 
     return (
         <div className="sendLine">
