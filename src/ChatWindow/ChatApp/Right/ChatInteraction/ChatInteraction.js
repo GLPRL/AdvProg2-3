@@ -1,6 +1,5 @@
-import React from "react";
+import React, {useEffect} from "react";
 import io from "socket.io-client"
-import {useEffect} from "react";
 
 export const socket = io.connect("http://localhost:5000")
 
@@ -13,6 +12,7 @@ function ChatInteraction(props) {
         }
         const contactUser = document.getElementById("contactUser").value;
         if (contactUser === "") {
+            document.getElementById("outText").value = "";
             return;
         }
         let autor = 'Bearer ' + props.token
@@ -72,8 +72,13 @@ function ChatInteraction(props) {
                     'accept': 'text/plain',
                 }
             })
-            const contactMessages = await responseGet.json();
-            props.setCurrentContactMsgs(contactMessages);
+            //if all 4 are active: if new chat, and msg is sent, the chat won't appear at dest.
+            //if user3 is in chat with user 2, and user1 is sending msg to user3, then it jumps to the user1+user3 chat
+            /*1*/const contactMessages = await responseGet.json();    //->     //if removed: cant run the next line
+            /*2*/props.setCurrentContactMsgs(contactMessages);        //->     //if removed: updates only time,
+                                                                            //and won't receive the new message or make the new chat at destination
+
+            //if both of them were removed, then: same as first line of the two
             const responseGetContacts = await fetch('http://localhost:5000/api/Chats/', {
                 method: 'GET',
                 headers: {
@@ -81,8 +86,12 @@ function ChatInteraction(props) {
                     'accept': 'text/plain',
                 }
             })
-            const contacts = await responseGetContacts.json();
-            props.setUserContacts(contacts);
+            /*1*/const contacts = await responseGetContacts.json();  //->    //if removed: cant run next line.
+            /*2*///props.setUserContacts(contacts);                  //->      //if removed: wont update contactslist, messages are displayed.
+                                                                //time is updated only at senders' side.
+                                //if both removed: same as 2nd line.
+
+            //IF ALL 4 ARE REMOVED: all effects combined
         }
     })
 
