@@ -6,7 +6,6 @@ export const socket = io.connect("http://localhost:5000")
 
 function ChatInteraction(props) {
     async function handleClick() {
-        console.log("CHATID IS: " + props.currentUser);
         const content = document.getElementById("outText").value;
         if (content === "") {
             return;
@@ -43,6 +42,8 @@ function ChatInteraction(props) {
         const newMsg = {text: content, floatValue: "float-right"};
         document.getElementById("outText").value = "";
         socket.emit("newMessage", props.currentUser);
+        const element = document.getElementById("msgScroll");
+        element.scrollTop = element.scrollHeight;
     }
 
     const chat = props.currentUser;
@@ -55,15 +56,10 @@ function ChatInteraction(props) {
     }, [props.currentUser]);
 
     const handleMessageReceived = async (chatID) => {
+
         let autor = 'Bearer ' + props.token
         let x= chatID-props.currentUser;
         let p=x;
-        console.log("x is" + x);
-        console.log("CHATID ISSSSSSS: " + chatID)
-        console.log("CHAT ISSSSS: " + chat);
-        console.log("MESSAGE RECEIVED");
-        console.log("before if ChatID " + chatID)
-        console.log("before if  chat: " + chat);
         const responseGetContacts = await fetch('http://localhost:5000/api/Chats/', {
             method: 'GET',
             headers: {
@@ -74,9 +70,6 @@ function ChatInteraction(props) {
         const contacts = await responseGetContacts.json();  //->
         props.setUserContacts(contacts);
         if (props.currentUser === chatID  ) {
-            console.log("----PAST IF----")
-            console.log("PAST IF CHATID ISSSSSSS: " + chatID)
-            console.log("PAST IF CHAT ISSSSS: " + chat);
             let userAddress = 'http://localhost:5000/api/Chats/' + props.currentUser + '/Messages'
 
             const responseGet = await fetch(userAddress, {
@@ -92,6 +85,8 @@ function ChatInteraction(props) {
             }
 
         }
+        const element = document.getElementById("msgScroll");
+        element.scrollTop = element.scrollHeight;
     }
 
     return (

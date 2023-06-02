@@ -18,6 +18,8 @@ function Contact(props) {
         props.setCurrentContactMsgs(contactMessages);
         props.setCurrentContactImage(props.image);
         props.setCurrentContactDisplayName(props.name);
+        const element = document.getElementById("msgScroll");
+        element.scrollTop = element.scrollHeight;
     }
     let lastMsgDate = null
     if (props.contactIdAndTime[0] == props.id) {
