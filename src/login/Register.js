@@ -43,7 +43,7 @@ function Register(){
         setPopupClosed(true);
         setShowPopup(false);
     }
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         let validSubmission=1;
         if (password.length < 8) {
@@ -79,7 +79,7 @@ function Register(){
             validSubmission =0;
         }
             if (validSubmission) {
-                fetch('http://localhost:5000/api/Users', {
+             const  response = await fetch('http://localhost:5000/api/Users', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -91,13 +91,10 @@ function Register(){
                         profilePic: chooseImage,
                     }),
                 })
-                    .then(response => {
-                        console.log('Response code:', response.status);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-
+                if (response.status !== 200){
+                    setUsernameError("username already exists");
+                    return;
+                }
 
 
                 setShouldNavigate(true);

@@ -13,15 +13,11 @@ function  UserTab(props) {
                     Authorization: `Bearer ${props.token}`
                 }
             });
-
-            console.log(response.status)
             if (response.ok) {
-                console.log("ok");
                 const data = await response.json();
                 setUserData(data);
 
             }
-        console.log("Test");
 
     };
 

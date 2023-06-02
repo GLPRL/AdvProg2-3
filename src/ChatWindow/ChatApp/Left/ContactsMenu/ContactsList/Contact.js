@@ -1,6 +1,5 @@
-import profilePic3 from '../../../../../images/profilePic3.jpg'
-
 function Contact(props) {
+
     let date;
     async function handleContactClick() {
         props.setCurrentUser(props.id);
@@ -20,8 +19,6 @@ function Contact(props) {
         props.setCurrentContactImage(props.image);
         props.setCurrentContactDisplayName(props.name);
     }
-    
-    
     let lastMsgDate = null
     if (props.contactIdAndTime[0] == props.id) {
         lastMsgDate = props.contactIdAndTime[1]

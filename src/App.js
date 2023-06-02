@@ -10,17 +10,18 @@ import ChatWindow from './ChatWindow/ChatWindow'
 import {useState} from "react";
 
 function App() {
+
     const [token, setToken] = useState(null);
-    const [user,setUser] =useState(null);
+    const [user, setUser] = useState(null);
     return (
         <Router>
-        <html lang="en">
+            <html lang="en">
             <Routes>
-                <Route path="/" element={<Login setToken={setToken}  setUser={setUser} />} />
-                <Route path="/register" element={<Register setToken={setToken} />} />
-                <Route path="/chat" element={<ChatWindow token={token} user={user} />} />
+                <Route path="/" element={<Login setToken={setToken} setUser={setUser}/>}/>
+                <Route path="/register" element={<Register setToken={setToken}/>}/>
+                <Route path="/chat" element={<ChatWindow token={token} user={user}/>}/>
             </Routes>
-    </html>
+            </html>
         </Router>
     );
 }

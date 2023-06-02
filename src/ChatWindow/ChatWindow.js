@@ -1,17 +1,17 @@
 import ChatApp from "./ChatApp/ChatApp"
 import {Link, Navigate} from "react-router-dom";
-import React from "react";
 import {isLoggedIn} from "../login/Login"
 import "../stylesheets/chatWindow.css"
 import AddContactModal from "../AddContactModal/AddContactModal";
-import { useState } from "react";
 import userData from "../usersData"
+import React, { useState } from "react";
 
 function ChatWindow({ setToken, token,user }) {
     const [idCount, setIdCount] = useState(0);
     const [userContacts,setUserContacts] = useState([]);
-    const [currentContactImage, setCurrentContactImage] = useState(null)
+    const [currentContactImage, setCurrentContactImage] = useState("")
     const [currentContactDisplayName, setCurrentContactDisplayName] = useState(null);
+
     function handleIdCount() {
         setIdCount(idCount + 1);
     }
@@ -22,6 +22,7 @@ function ChatWindow({ setToken, token,user }) {
     if(!isLoggedIn.value) {
         return(<Navigate to="/" />)
     }
+
     return (
         <>
             <head>

@@ -13,6 +13,7 @@ function ContactsList(props) {
                     'accept': 'text/plain',
                 }
             })
+                
                 const contacts = await response.json();
                 props.setUserContacts(contacts);
         }

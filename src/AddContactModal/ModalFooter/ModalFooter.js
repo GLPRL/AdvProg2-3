@@ -24,7 +24,6 @@ function ModalFooter(props) {
                 })
 
                 .then(async postResult => {
-                    console.log("postResult is " + postResult.status);
                     if (postResult.status == 200) {
                         const response  = await fetch('http://localhost:5000/api/Chats',{
                         method: 'GET',
