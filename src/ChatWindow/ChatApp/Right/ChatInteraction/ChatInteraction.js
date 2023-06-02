@@ -6,6 +6,12 @@ export const socket = io.connect("http://localhost:5000")
 
 function ChatInteraction(props) {
     async function handleClick() {
+        if (props.currentUser == 0) {
+            document.getElementById("outText").value = "";
+            return;
+        }
+
+
         const content = document.getElementById("outText").value;
         if (content === "") {
             return;
