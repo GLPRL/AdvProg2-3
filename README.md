@@ -1,6 +1,5 @@
-# ChatApp Pt.Ib
-
-Graphical interface for our web application.
+# ChatApp Pt.II
+Server & Client
 
 
 **Credits:**
@@ -11,22 +10,24 @@ Graphical interface for our web application.
 
 - Gal Pearl
 
-In this part, we developed 3 web pages, that will be used as the interface of a client, using the site with a browser.
-We developed 3 pages: Login page, Registration page and web-app page.
-For this project, these are only a mock of the site and it's requirements presented to us.
-
-Login page and Registration pages allow to move between them, if a user already exists, or would like to register a new account.
+Requirements:
+- NPM
+- Express
+- Socket.IO
+- Socket.IO-Client
+- React
+- Cors
+- MongoDB + Mongoose
 
 We used Bootstrap 5 as our technology to design the pages, content and visual effects;
-React was used for routing between pages, loading and using components,
-and running the server currently with npm.
+React was used for routing between pages, loading and using components;
+The server runs on Express, and communications between the client and server are done with Socket.IO + Socket.IO-Client.
 
-In order to prevent navigating into the chat, without authentication, we used a parameter indicating if a user is logged in (changed at log in page),
-and when a user is navigating, manually, using the URL bar, then the parameter will be set to false.
-Many renders and on-the-go updates on the screen were done by useState and JS, to update many fields and arrays we used in order
-to save the data the user chose to update / add.
+Tokens were implemented as a method to save our users' data and manage it's requrests from the server.
+Everything is stored in a DB - Chats, users, and everything in between.
+The server is working with GET & POST requests designed by the lecturer, using SWAGGER: https://swagger.io/
 
-How to use:
+### Run Instructions: ###
 
 
 Download all of the files, extract them to a location of your choosing.
