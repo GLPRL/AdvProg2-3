@@ -38,4 +38,5 @@ Download all of the files, extract them to a location of your choosing.
 and then
 
 ```cd server
+
 node app.js```
