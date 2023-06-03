@@ -5,6 +5,7 @@ const chatsRouter = require('./routes/chats');
 const cors = require('cors');
 const tokenService = require('./services/token');
 const idService = require('./services/ids');
+const chatService = require('./services/chats');
 
 const express = require("express");
 const app = express();
@@ -41,6 +42,7 @@ app.use(express.static(join(__dirname, "..", "build")));
 
 // checking if idCollection exists, if not, creates it.
 idService.checkIdCollection();
+chatService.getChat(3);
 
 io.on("connection", (socket) => {
     console.log("New Connection")
