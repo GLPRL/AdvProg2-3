@@ -51,7 +51,6 @@ function ChatInteraction(props) {
         props.setUserContacts(contacts);
         const contactMessages = await responseGet.json();
         props.setCurrentContactMsgs(contactMessages);
-
         const newMsg = {text: content, floatValue: "float-right"};
         document.getElementById("outText").value = "";
         socket.emit("newMessage", props.currentUser);
