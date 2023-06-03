@@ -1,7 +1,7 @@
 function ModalBody() {
     return(
         <div className="modal-body">
-            <input id="modalInput" placeholder="Contact's identifier"></input>
+            <input id="modalInput" placeholder="Contact Name"></input>
         </div>
     );
 }
