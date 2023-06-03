@@ -40,3 +40,4 @@ and then
 ```cd server```
 and then
 ```node app.js```
+Access the application on http://localhost:5000
