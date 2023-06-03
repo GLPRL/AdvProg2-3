@@ -42,4 +42,4 @@ and then
 ```node app.js```
 Access the application on http://localhost:5000
 
-For running only the front end, run ```npm start```. That will open the application without running the backend/server.
+For running only the front end, run ```npm start```. That will open the application without running the backend/server. WARNING: USE THIS ONLY IF YOU WANT TO CHECK INFRONT OF HEMI'S SERVER OTHERWISE DONT USE
