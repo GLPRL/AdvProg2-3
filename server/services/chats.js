@@ -11,10 +11,15 @@ const createChat= async (chatId, currentUser, contactUser, contactDisplayName, c
         return await chat.save();
 }
 
-const getChat = async (chatId) => {
+const getChat = async (chatId, userOfRequest) => {
         const chatsCollection = mongoose.model('chatcols', ChatCol.schema, 'chatcols');
         const chat = await chatsCollection.findOne({_id: chatId}).exec();
         if (chat == null) {
+                return null;
+        }
+
+        if (chat.userOne != userOfRequest && userOfRequest != chat.userTwo) {
+                console.log("username isnt part of the chat wanted --- " + userOfRequest);
                 return null;
         }
 
@@ -77,7 +82,7 @@ const getChat = async (chatId) => {
                 ],
                 messages : newMsgsArray 
         }
-        //console.log(resVal);
+        console.log(resVal);
         return resVal
 
 }

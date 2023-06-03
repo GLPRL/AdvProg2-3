@@ -16,7 +16,14 @@ const createMessage = async (req, res) => {
     const messageId = await idGetter.nextId("messages");
     const messageContent = req.body.msg
     const chatId = req.params.id
-    res.status(200).json(await messageService.createMessage(chatId , currentUser, messageContent, messageId));
+
+
+    const retVal = await messageService.createMessage(chatId , currentUser, messageContent, messageId);
+
+    if (!retVal) {
+        return res.status(400).json({title : "Unauthorized", status: "401"});
+    }
+    return res.status(200).json(retVal);
 
 }
 
@@ -31,7 +38,11 @@ const getMessages = async(req, res) => {
         res.status(401).send();
     }
 
-    res.status(200).json(await messageService.getMessages(req.params.id));
+    const retVal = await messageService.getMessages(req.params.id, validity.username);
+    if (!retVal) {
+        return res.status(400).json({title : "Unauthorized", status: "401"});
+    }
+    return res.status(200).json(retVal);
 }
 
 module.exports = {

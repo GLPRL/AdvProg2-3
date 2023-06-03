@@ -21,7 +21,7 @@ const createChat = async (req, res) => {
     const currentUser = validity.username
     const chatContact = await userGetter.findOne({username: req.body.username})
     if (chatContact == null) {
-        res.status(401).send();
+        res.status(400).send("No such user");
     } else {
         const chatUser = await userGetter.findOne({username: currentUser})
         const addChatToContact = await chatService.createChat(chatId, req.body.username ,currentUser, chatUser.displayName, chatUser.profilePic);
@@ -53,7 +53,7 @@ const getChat = async (req, res) => {
     }
 
     const chatId = req.params.id
-    const retVal = await chatService.getChat(chatId)
+    const retVal = await chatService.getChat(chatId, validity.username)
 
     if (!retVal) {
         return res.status(401).send();
@@ -92,9 +92,9 @@ const removeChat = async(req,res) => {
     const retVal = chatService.removeChat(chatId)
 
     if (!retVal) {
-        return res.status(401).send();
+        return res.status(404).json({title: "Not found", status: "404"});
     } else {
-        return res.status(200).send();
+        return res.status(204).send();
     }
 }
 
