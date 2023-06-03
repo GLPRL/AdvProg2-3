@@ -115,10 +115,21 @@ const getChats = async (username) => {
 const removeChat = async (chatId) => {
         const chatsCollection = mongoose.model('chatcols', ChatCol.schema, 'chatcols');
         const chat = await chatsCollection.findOne({_id: chatId}).exec();
-        console.log("chatId is " + chat._id)
-        console.log("user1 is " + chat.userOne)
-        console.log("user2 is " + chat.userTwo)
+        if (chat == null) {
+                return null;
+        }
+        const userOneCollection = mongoose.model(chat.userOne, Chat.schema, chat.userOne);
+        const userTwoCollection = mongoose.model(chat.userTwo, Chat.schema, chat.userTwo);
+        const chatUserOne = await userOneCollection.findOne({_id: chatId}).exec();
+        const chatUserTwo = await userTwoCollection.findOne({_id: chatId}).exec();
 
+        await chat.deleteOne();
+        await chatUserOne.deleteOne();
+        await chatUserTwo.deleteOne();
+        //console.log("chatId is " + chat._id)
+        //console.log("user1 is " + chat.userOne)
+        //console.log("user2 is " + chat.userTwo)
+        return 1;
 }
 
 
