@@ -2,8 +2,20 @@ const mongoose = require('mongoose');
 const Message = require('../models/messages');
 const User = require('../models/users');
 const Chat = require('../models/chats');
+const ChatCol = require('../models/chatCol');
 
 const createMessage= async (chatId, currentUser, messageContent, messageId) =>{
+    const chatsCollection = mongoose.model('chatcols', ChatCol.schema, 'chatcols');
+    const chat = await chatsCollection.findOne({_id: chatId}).exec();
+        if (chat == null) {
+                return null;
+        }
+
+        if (chat.userOne != currentUser && currentUser != chat.userTwo) {
+                console.log("username isnt part of the chat wanted --- " + userOfRequest);
+                return null;
+        }
+
     const messagesModel = mongoose.model('messages', Message.schema, 'messages');
 
     const userMessages = await messagesModel.findById(chatId)
@@ -27,7 +39,20 @@ const createMessage= async (chatId, currentUser, messageContent, messageId) =>{
     return resData
 }
 
-const getMessages = async (chatId) =>{
+const getMessages = async (chatId, username) =>{
+    const chatsCollection = mongoose.model('chatcols', ChatCol.schema, 'chatcols');
+    const chat = await chatsCollection.findOne({_id: chatId}).exec();
+        if (chat == null) {
+                return null;
+        }
+
+        if (chat.userOne != username && username != chat.userTwo) {
+                console.log("username isnt part of the chat wanted --- " + userOfRequest);
+                return null;
+        }
+
+
+
     const messagesModel = mongoose.model('messages', Message.schema, 'messages');
     const userMessages = await messagesModel.findById(chatId)
     const msgsArray = userMessages.messages
