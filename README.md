@@ -15,7 +15,7 @@ Requirements:
 - Express
 - Socket.IO
 - Socket.IO-Client
-- React
+- React + React Router
 - Cors
 - MongoDB + Mongoose
 
