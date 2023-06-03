@@ -42,7 +42,6 @@ app.use(express.static(join(__dirname, "..", "build")));
 
 // checking if idCollection exists, if not, creates it.
 idService.checkIdCollection();
-//chatService.getChat(2, "ng2");
 
 io.on("connection", (socket) => {
     io.emit("hello", "there")
