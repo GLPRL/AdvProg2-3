@@ -1,6 +1,5 @@
 import usersData from '../../../../../usersData'
 import '../../../../../stylesheets/chatWindow.css'
-import monkeyProfilePic from '../../../../../images/monkeyprofilepic.jpg'
 import Contact from './Contact';
 function ContactsList(props) {
 
