@@ -114,12 +114,17 @@ const getChats = async (username) => {
 
 const removeChat = async (chatId) => {
         const chatsCollection = mongoose.model('chatcols', ChatCol.schema, 'chatcols');
-        chatsCollection.findOne
+        const chat = await chatsCollection.findOne({_id: chatId}).exec();
+        console.log("chatId is " + chat._id)
+        console.log("user1 is " + chat.userOne)
+        console.log("user2 is " + chat.userTwo)
+
 }
 
 
 module.exports = {
         createChat,
         getChat,
-        getChats
+        getChats,
+        removeChat
         };

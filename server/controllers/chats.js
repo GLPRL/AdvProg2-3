@@ -84,9 +84,9 @@ const removeChat = async(req,res) => {
     }
 
     const chatId = req.params.id
-    const res = chatService.removeChat(chatId)
+    const retVal = chatService.removeChat(chatId)
 
-    if (!res) {
+    if (!retVal) {
         return res.status(401).send();
     } else {
         return res.status(200).send();
