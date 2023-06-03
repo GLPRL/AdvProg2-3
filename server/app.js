@@ -31,10 +31,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatApp', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
-    console.log('Connected to MongoDB');
+    //
 })
     .catch((error) => {
-        console.error('Failed to connect to MongoDB', error);
+        //
     });
 
 app.post('/api/Tokens',tokenService.getToken);
@@ -45,18 +45,16 @@ idService.checkIdCollection();
 //chatService.getChat(2, "ng2");
 
 io.on("connection", (socket) => {
-    console.log("New Connection")
-    console.log(socket.id);
     io.emit("hello", "there")
     socket.on("foo", (data) => {
-        console.log(data)
+        //
     })
     socket.on("newMessage", (chatID) => {
-        console.log("NEWMESSAGE");
+        //
         socket.broadcast.emit("receiveMessage", chatID)
     })
 })
 
 server.listen(5000, () => {
-    console.log("Server online")
+    //
 });

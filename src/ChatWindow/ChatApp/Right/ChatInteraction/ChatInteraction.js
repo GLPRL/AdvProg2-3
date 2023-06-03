@@ -52,7 +52,6 @@ function ChatInteraction(props) {
 
         const contactMessages = await responseGet.json();
         props.setCurrentContactMsgs(contactMessages);
-        //props.setContactIdAndTime([props.currentUser, contactMessages[0].created])
 
         const newMsg = {text: content, floatValue: "float-right"};
         document.getElementById("outText").value = "";

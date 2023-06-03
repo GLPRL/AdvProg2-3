@@ -25,13 +25,10 @@ const getChat = async (chatId, userOfRequest) => {
 
         const user1 = chat.userOne;
         const user2 = chat.userTwo;
-        //console.log("---- " + user1);
-        //console.log("---- " + user2);
 
         const userOneDetails = await User.findOne({username: user1})
         const userTwoDetails = await User.findOne({username: user2})
 
-        //console.log(userOneDetails);
 
         const messagesModel = mongoose.model('messages', Messages.schema, 'messages');
         const msgsOfChat = await messagesModel.findOne({_id: chatId}).exec();
@@ -82,7 +79,6 @@ const getChat = async (chatId, userOfRequest) => {
                 ],
                 messages : newMsgsArray 
         }
-        console.log(resVal);
         return resVal
 
 }
@@ -146,9 +142,6 @@ const removeChat = async (chatId) => {
         await chatUserOne.deleteOne();
         await chatUserTwo.deleteOne();
         await msgsOfChat.deleteOne();
-        //console.log("chatId is " + chat._id)
-        //console.log("user1 is " + chat.userOne)
-        //console.log("user2 is " + chat.userTwo)
         return 1;
 }
 
