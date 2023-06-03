@@ -41,3 +41,5 @@ and then
 and then
 ```node app.js```
 Access the application on http://localhost:5000
+
+For running only the front end, run ```npm start```. That will open the application without running the backend/server.
