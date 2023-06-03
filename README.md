@@ -34,12 +34,9 @@ Download all of the files, extract them to a location of your choosing.
 **Everything must be in the same directory**
 
 ``` cd ``` into the location of the files, 
-```npm run build```
 and then
-
-```cd server```
-,
 ```node app.js```
 Access the application on http://localhost:5000
+(Make sure you have installed all the dependencies)
 
 For running only the front end, run ```npm start```. That will open the application without running the backend/server. WARNING: USE THIS ONLY IF YOU WANT TO CHECK INFRONT OF HEMI'S SERVER OTHERWISE DONT USE
