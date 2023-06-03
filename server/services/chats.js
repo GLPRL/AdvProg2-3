@@ -2,11 +2,10 @@ const mongoose = require('mongoose');
 const Chat = require('../models/chats');
 const User = require('../models/users');
 const Messages = require('../models/messages');
-
+const ChatCol = require('../models/chatCol');
 
 const createChat= async (chatId, currentUser, contactUser, contactDisplayName, contactProfilePic) =>{
         const userChatCollection = mongoose.model(currentUser, Chat.schema, currentUser);
-        
         const contactDetails = {username: contactUser, displayName: contactDisplayName, profilePic: contactProfilePic}
         const chat = new userChatCollection({_id: chatId,user: contactDetails},);
         return await chat.save();
@@ -74,6 +73,9 @@ const getChat = async (chatId, firstUsername) => {
 const getChats = async (username) => {
         const userChatCollection = mongoose.model(username, Chat.schema, username);
         const temp = await userChatCollection.find().exec();
+        if (!temp) {
+                return temp;
+        }
 
         retChatsArray = [];
         for (let i = 0; i < temp.length; i++) {
@@ -108,6 +110,11 @@ const getChats = async (username) => {
         }
 
         return (retChatsArray)
+}
+
+const removeChat = async (chatId) => {
+        const chatsCollection = mongoose.model('chatcols', ChatCol.schema, 'chatcols');
+        chatsCollection.findOne
 }
 
 
