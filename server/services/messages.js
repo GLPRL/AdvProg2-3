@@ -12,7 +12,6 @@ const createMessage= async (chatId, currentUser, messageContent, messageId) =>{
         }
 
         if (chat.userOne != currentUser && currentUser != chat.userTwo) {
-                console.log("username isnt part of the chat wanted --- " + userOfRequest);
                 return null;
         }
 
@@ -47,7 +46,6 @@ const getMessages = async (chatId, username) =>{
         }
 
         if (chat.userOne != username && username != chat.userTwo) {
-                console.log("username isnt part of the chat wanted --- " + userOfRequest);
                 return null;
         }
 
