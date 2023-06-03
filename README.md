@@ -38,7 +38,7 @@ Download all of the files, extract them to a location of your choosing.
 and then
 
 ```cd server```
-and then
+,
 ```node app.js```
 Access the application on http://localhost:5000
 
