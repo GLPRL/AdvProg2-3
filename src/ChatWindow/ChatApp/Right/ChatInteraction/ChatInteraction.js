@@ -49,7 +49,6 @@ function ChatInteraction(props) {
         })
         const contacts = await responseGetContacts.json();  //->
         props.setUserContacts(contacts);
-
         const contactMessages = await responseGet.json();
         props.setCurrentContactMsgs(contactMessages);
 
