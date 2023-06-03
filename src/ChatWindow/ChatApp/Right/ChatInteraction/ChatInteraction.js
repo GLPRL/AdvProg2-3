@@ -10,8 +10,6 @@ function ChatInteraction(props) {
             document.getElementById("outText").value = "";
             return;
         }
-
-
         const content = document.getElementById("outText").value;
         if (content === "") {
             return;
@@ -41,9 +39,20 @@ function ChatInteraction(props) {
                 'accept': 'text/plain',
             }
         })
+
+        const responseGetContacts = await fetch('http://localhost:5000/api/Chats/', {
+            method: 'GET',
+            headers: {
+                'Authorization': autor,
+                'accept': 'text/plain',
+            }
+        })
+        const contacts = await responseGetContacts.json();  //->
+        props.setUserContacts(contacts);
+
         const contactMessages = await responseGet.json();
         props.setCurrentContactMsgs(contactMessages);
-        props.setContactIdAndTime([props.currentUser, contactMessages[0].created])
+        //props.setContactIdAndTime([props.currentUser, contactMessages[0].created])
 
         const newMsg = {text: content, floatValue: "float-right"};
         document.getElementById("outText").value = "";
