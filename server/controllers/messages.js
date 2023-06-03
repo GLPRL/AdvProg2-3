@@ -16,7 +16,7 @@ const createMessage = async (req, res) => {
     const messageId = await idGetter.nextId("messages");
     const messageContent = req.body.msg
     const chatId = req.params.id
-    res.json(await messageService.createMessage(chatId , currentUser, messageContent, messageId));
+    res.status(200).json(await messageService.createMessage(chatId , currentUser, messageContent, messageId));
 
 }
 
@@ -31,7 +31,7 @@ const getMessages = async(req, res) => {
         res.status(401).send();
     }
 
-    res.json(await messageService.getMessages(req.params.id));
+    res.status(200).json(await messageService.getMessages(req.params.id));
 }
 
 module.exports = {

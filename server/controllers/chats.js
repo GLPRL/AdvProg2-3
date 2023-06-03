@@ -31,7 +31,7 @@ const createChat = async (req, res) => {
         const chatsCollection = mongoose.model('chatcols', ChatCol.schema, 'chatcols');
         const newChatInChatCol = new chatsCollection({_id: chatId, userOne: currentUser, userTwo: req.body.username});
         const flag = await newChatInChatCol.save();
-        res.json(await chatService.createChat(chatId, currentUser ,req.body.username, chatContact.displayName, chatContact.profilePic));
+        res.status(200).json(await chatService.createChat(chatId, currentUser ,req.body.username, chatContact.displayName, chatContact.profilePic));
     }
 }
 
@@ -53,7 +53,12 @@ const getChat = async (req, res) => {
     }
 
     const chatId = req.params.id
-    res.json(await chatService.getChat(chatId));
+    const retVal = await chatService.getChat(chatId)
+
+    if (!retVal) {
+        return res.status(401).send();
+    }
+    res.status(200).json(retVal);
 }
 
 
@@ -70,7 +75,7 @@ const getChats = async(req,res) => {
     if (!collection) {
         return res.status(401).send();
     }
-    res.json(collection)
+    res.status(200).json(collection)
 }
 
 const removeChat = async(req,res) => {

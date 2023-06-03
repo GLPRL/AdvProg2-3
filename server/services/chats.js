@@ -11,48 +11,60 @@ const createChat= async (chatId, currentUser, contactUser, contactDisplayName, c
         return await chat.save();
 }
 
-const getChat = async (chatId, firstUsername) => {
+const getChat = async (chatId) => {
+        const chatsCollection = mongoose.model('chatcols', ChatCol.schema, 'chatcols');
+        const chat = await chatsCollection.findOne({_id: chatId}).exec();
+        if (chat == null) {
+                return null;
+        }
 
-        const user1 = firstUsername;
-        const userOneChatCollection = mongoose.model(user1, Chat.schema, user1);
-        const chatDocInUser = await userOneChatCollection.findOne({_id:chatId})
-        const user2 = chatDocInUser.user.username;
+        const user1 = chat.userOne;
+        const user2 = chat.userTwo;
+        //console.log("---- " + user1);
+        //console.log("---- " + user2);
 
         const userOneDetails = await User.findOne({username: user1})
         const userTwoDetails = await User.findOne({username: user2})
+
+        //console.log(userOneDetails);
 
         const messagesModel = mongoose.model('messages', Messages.schema, 'messages');
         const msgsOfChat = await messagesModel.findOne({_id: chatId}).exec();
         const msgsArray = msgsOfChat.messages
         const newMsgsArray = []
 
-        for (let i = 0; i < msgsArray.length; i++) {
-                let tempDisplayName = null;
-                let tempProfilePic = null;
-                if (msgsArray[i].sender.username == user1) {
-                        tempDisplayName = userOneDetails.displayName;
-                        tempProfilePic = userOneDetails.profilePic;
-                } else {
-                        tempDisplayName = userTwoDetails.displayName;
-                        tempProfilePic = userTwoDetails.profilePic;
+        if (msgsArray) {
+                for (let i = 0; i < msgsArray.length; i++) {
+                        let tempDisplayName = null;
+                        let tempProfilePic = null;
+                        if (msgsArray[i].sender.username == user1) {
+                                tempDisplayName = userOneDetails.displayName;
+                                tempProfilePic = userOneDetails.profilePic;
+                        } else {
+                                tempDisplayName = userTwoDetails.displayName;
+                                tempProfilePic = userTwoDetails.profilePic;
+                        }
+                        
+                        let msgDetails = {
+                                id: msgsArray[i]._id, 
+                                created: msgsArray[i].created,
+                                sender: {
+                                        username: msgsArray[i].sender.username,
+                                        displayName: tempDisplayName,
+                                        profilePic: tempProfilePic        
+                                },
+                                content: msgsArray[i].content
+                        }
+                        newMsgsArray.push(msgDetails)
                 }
-                
-                let msgDetails = {
-                        id: msgsArray[i]._id, 
-                        created: msgsArray[i].created,
-                        sender: {
-                                username: msgsArray[i].sender.username,
-                                displayName: tempDisplayName,
-                                profilePic: tempProfilePic        
-                        },
-                        content: msgsArray[i].content
-                }
-                newMsgsArray.push(msgDetails)
         }
+
+
+        
 
         const resVal = {
                 id : chatId,
-                user : [
+                users : [
                         {
                                 username: user1,
                                 displayName: userOneDetails.displayName,
@@ -65,7 +77,7 @@ const getChat = async (chatId, firstUsername) => {
                 ],
                 messages : newMsgsArray 
         }
-
+        //console.log(resVal);
         return resVal
 
 }
