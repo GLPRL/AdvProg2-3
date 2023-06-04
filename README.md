@@ -38,5 +38,6 @@ and then
 ```node app.js```
 .Access the application on http://localhost:5000
 (Make sure you have installed all the dependencies before running the system)
+Please only upload small sized pictures otherwise mongoDB wont be able to handle them. Hemi stated that only small sized pictures will be tested.
 
 For running only the front end, run ```npm start```. That will open the application without running the backend/server. WARNING: USE THIS ONLY IF YOU WANT TO CHECK INFRONT OF HEMI'S SERVER OTHERWISE DONT USE
