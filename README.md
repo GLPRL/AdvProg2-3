@@ -19,6 +19,9 @@ Requirements:
 - Cors
 - MongoDB + Mongoose
 
+> Important: The dafault packet size sent in registration is small. Please upload only small sized images as profile picture,
+> otherwise the user will NOT be registered.
+
 We used Bootstrap 5 as our technology to design the pages, content and visual effects;
 React was used for routing between pages, loading and using components;
 The server runs on Express, and communications between the client and server are done with Socket.IO + Socket.IO-Client.
