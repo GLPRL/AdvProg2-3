@@ -21,6 +21,7 @@ Requirements:
 
 ### ** Important: The dafault packet size sent in registration is small. Please upload only small sized images as profile picture, otherwise the user will NOT be registered. **
 Example images you can use :
+
 ![Untitled](https://github.com/GLPRL/AdvProg2-3/assets/116657293/3f23f252-9db9-43e4-8fac-cb8cd7d76bef)
 
 
