@@ -24,6 +24,9 @@ Example images you can use :
 
 ![Untitled](https://github.com/GLPRL/AdvProg2-3/assets/116657293/3f23f252-9db9-43e4-8fac-cb8cd7d76bef)
 
+![profilePic3 (1)](https://github.com/GLPRL/AdvProg2-3/assets/116657293/686fcd91-60b4-4ab9-bb1d-25ed882917c4)
+
+
 
 We used Bootstrap 5 as our technology to design the pages, content and visual effects;
 React was used for routing between pages, loading and using components;
